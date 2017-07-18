@@ -89,17 +89,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-//轮播
-// .state('slider', {
-//   url: '/slider',
-//   views: {
-//     '': {
-//       templateUrl: 'templates/tab-dash.html',
-//       controller: 'SliderCtrl'
-//     }
-//   }
-// })
-
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

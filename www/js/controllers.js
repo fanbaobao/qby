@@ -2,7 +2,14 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope,Dash,$window) {
   $scope.bannerT=Dash.bannerTop();
-  console.log($scope.bannerT);
+  $scope.classlist=[
+    {title:'鲜花',src:'../img/dash/xianhua_icon.png'},
+    {title:'永生花',src:'../img/dash/yongshenghua_icon.png'},
+    {title:'蛋糕',src:'../img/dash/cake_icon.png'},
+    {title:'礼品',src:'../img/dash/gift_icon.png'},
+    {title:'巧克力',src:'../img/dash/choclate_icon.png'}
+  ];
+  // console.log($scope.bannerT);
   //搜索框获取焦点时，处理跳转到分类页面
   $scope.goClass=function () {
     $window.location.href='../templates/tab-chats.html';
@@ -10,6 +17,10 @@ angular.module('starter.controllers', [])
   //点击登录时，处理跳转到登录页面
   $scope.goLogin=function () {
 
+  }
+  //点击不同的分类时进入不同的类别
+  $scope.goThisclass=function (page) {
+    
   }
 })
 

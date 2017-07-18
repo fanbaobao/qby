@@ -20,7 +20,7 @@ angular.module('starter.controllers', [])
   }
   //点击不同的分类时进入不同的类别
   $scope.goThisclass=function (page) {
-    
+
   }
 })
 
@@ -51,6 +51,11 @@ angular.module('starter.controllers', [])
 })
 //我的
   .controller('MineCtrl', function($scope) {
+    $scope.settings = {
+      enableFriends: true
+    }
+  })
+  .controller('MineLoginCtrl', function($scope) {
     $scope.settings = {
       enableFriends: true
     }

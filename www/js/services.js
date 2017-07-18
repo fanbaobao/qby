@@ -68,5 +68,15 @@ angular.module('starter.services', [])
         )
         return bannerBlank;
       },
+      tehui:function () {
+        $http.get('http://192.168.3.147:3000/banner').then(
+          function (res) {
+            if(res.data.success){
+              bannerBlank.push(res.data.data);
+            }
+          }
+        )
+        return bannerBlank;
+      },
     }
   })

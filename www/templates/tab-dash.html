@@ -1,51 +1,20 @@
-<!DOCTYPE html>
-
-<html ng-app="myApp">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <title>使用ionic中ion-slide-box实现移动app轮播特效</title>
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0,user-scalable=no,width=device-width" />
-  <link rel="stylesheet" href="../lib/ionic/css/ionic.min.css" />
-  <script type="text/javascript"src="../lib/ionic/js/ionic.bundle.min.js"></script>
+<ion-view view-title="Dash">
   <style>
     img{
-      max-width:100%;
+      width: 100%;
     }
   </style>
-
-</head>
-
-<body ng-controller="SliderCtrl">
-
-<ion-header-bar class="bar-positive">
-
-  <!--<ion-title>-->
-
-    <!--<h3>移动app轮播特效的制作</h3>-->
-    <!--<input type="text">-->
-
-  <!--</ion-title>-->
+  <script src="../lib/ionic/js/ionic.bundle.min.js"></script>
   <ion-content>
-    <!--头部banner轮播-->
-    <ion-slide-box active-slide="model.activeIndex"
-                   does-continue="true" slide-interval="4000" auto-play="true"
-                   show-pager="true" pager-click="toSlideIndex(index)"
-                   on-tap="stopOrStart()">
-      <ion-slide>
-        <img src="../img/adam.jpg" />
-      </ion-slide>
-    </ion-slide-box>
-  </ion-content>
 
-</ion-header-bar>
-
-
-
-<!--<ion-footer-bar class="bar-positive"></ion-footer-bar>-->
-
-</body>
-
-</html>
+  <!--头部banner轮播-->
+  <ion-slide-box active-slide="model.activeIndex"
+                 does-continue="true" slide-interval="4000" auto-play="true"
+                 show-pager="true" pager-click="toSlideIndex(index)"
+                 on-tap="stopOrStart()">
+    <ion-slide>
+      <img ng-repeat="banner in bannerT track by $index" ng-src="{{banner}}">
+    </ion-slide>
+  </ion-slide-box>
+</ion-content>
+</ion-view>

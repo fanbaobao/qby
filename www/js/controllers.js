@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope,Dash) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -29,6 +29,7 @@ angular.module('starter.controllers', [])
 
 //头部banner轮播
   .controller('SliderCtrl', function($scope,$ionicSlideBoxDelegate) {
+    // $scope.
     $scope.settings = {
       enableFriends: true
     }

@@ -49,7 +49,13 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('Dash', function() {
-  console.log($httpProvider);
-  $http.get()
+.factory('Dash', function($http) {
+  return $http.get('http://192.168.3.147:3000/banner').then(
+    function (res) {
+      console.log(res);
+      if(res.data.success){
+        console.log(res.data.data);
+      }
+    }
+  );
 })

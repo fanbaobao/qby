@@ -2,6 +2,11 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope,Dash,$window) {
   $scope.bannerT=Dash.bannerTop();
+
+  $scope.good=Dash.tehui();
+
+  $scope.xianhua=Dash.jingxuan();
+
   $scope.classlist=[
     {title:'鲜花',src:'../img/dash/xianhua_icon.png'},
     {title:'永生花',src:'../img/dash/yongshenghua_icon.png'},
@@ -20,7 +25,12 @@ angular.module('starter.controllers', [])
   }
   //点击不同的分类时进入不同的类别
   $scope.goThisclass=function (page) {
-    
+
+  }
+
+  //点击进入该商品的卖场
+  $scope.sale=function (id) {
+
   }
 })
 

@@ -1,17 +1,58 @@
-<ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h2>Welcome to Ionic</h2>
-    <p>
-    This is the Ionic starter for tabs-based apps. For other starters and ready-made templates, check out the <a href="http://market.ionic.io/starters" target="_blank">Ionic Market</a>.
-    </p>
-    <p>
-      To edit the content of each tab, edit the corresponding template file in <code>www/templates/</code>. This template is <code>www/templates/tab-dash.html</code>
-    </p>
-    <p>
-    If you need help with your app, join the Ionic Community on the <a href="http://forum.ionicframework.com" target="_blank">Ionic Forum</a>. Make sure to <a href="http://twitter.com/ionicframework" target="_blank">follow us</a> on Twitter to get important updates and announcements for Ionic developers.
-    </p>
-    <p>
-      <b>Psst!</b> - Try <a href="http://view.ionic.io/">Ionic View</a> to easily share and test your app with clients and co-workers.
-    </p>
-  </ion-content>
-</ion-view>
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>使用ionic中ion-slide-box实现移动app轮播特效</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0,user-scalable=no,width=device-width" />
+  <!--<link rel="stylesheet" href="css/ionic.css" />-->
+  <script type="text/javascript"src="../lib/ionic/js/ionic.bundle.min.js"></script>
+  <style>
+    img{
+      max-width:100%;
+    }
+  </style>
+
+</head>
+
+<body ng-controller="SliderCtrl">
+
+<ion-header-bar class="bar-positive">
+
+  <!--<ion-title>-->
+
+    <!--<h3>移动app轮播特效的制作</h3>-->
+    <!--<input type="text">-->
+
+  <!--</ion-title>-->
+
+</ion-header-bar>
+
+<ion-content>
+  <!--头部banner轮播-->
+  <ion-slide-box active-slide="model.activeIndex"
+                 does-continue="true" slide-interval="4000" auto-play="true"
+                 show-pager="true" pager-click="toSlideIndex(index)"
+                 on-tap="stopOrStart()">
+    <ion-slide>
+      <img src="../img/adam.jpg" />
+    </ion-slide>
+    <ion-slide>
+      <img src="../img/logo.png" />
+    </ion-slide>
+    <ion-slide>
+      <img src="../img/mike.png" />
+    </ion-slide>
+  </ion-slide-box>
+</ion-content>
+
+</ion-content>
+
+<!--<ion-footer-bar class="bar-positive"></ion-footer-bar>-->
+
+</body>
+
+</html>

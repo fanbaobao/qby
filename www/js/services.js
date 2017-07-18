@@ -47,4 +47,9 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+.factory('Dash', function() {
+  console.log($httpProvider);
+  $http.get()
+})

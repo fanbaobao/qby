@@ -23,8 +23,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-
+.config(function($ionicConfigProvider,$stateProvider, $urlRouterProvider) {
+  $ionicConfigProvider.platform.android.tabs.position('bottom');
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -77,7 +77,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+//  我的
+  .state('tab.mine', {
+    url: '/mine',
+    views: {
+      'tab-mine': {
+        templateUrl: 'templates/tab-mine.html',
+        controller: 'MineCtrl'
+      }
+    }
+  })
+//轮播
+// .state('slider', {
+//   url: '/slider',
+//   views: {
+//     '': {
+//       templateUrl: 'templates/tab-dash.html',
+//       controller: 'SliderCtrl'
+//     }
+//   }
+// })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');

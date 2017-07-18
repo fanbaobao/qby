@@ -18,6 +18,10 @@ angular.module('starter.controllers', [])
   $scope.goLogin=function () {
 
   }
+  //点击不同的分类时进入不同的类别
+  $scope.goThisclass=function (page) {
+    
+  }
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {

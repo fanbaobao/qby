@@ -68,8 +68,5 @@ angular.module('starter.services', [])
         )
         return bannerBlank;
       },
-      a:function () {
-        return arr;
-      },
     }
   })

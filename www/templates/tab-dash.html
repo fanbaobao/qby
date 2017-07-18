@@ -71,13 +71,39 @@
     img{
       width: 100%;
     }
+    /*头部轮播下面的企业小列表*/
+    ul.culture{
+      width: 100%;
+      height: 22px;
+      border-bottom: 1px solid #eee;
+    }
+    ul.culture li{
+      float: left;
+      margin-right:14px;
+      font-size:12px;
+      color:rgba(0,0,0,0.6);
+    }
+    ul.culture li:last-child{
+      margin-right: 0;
+    }
+    ul.culture li:first-child{
+      margin-left:10px;
+    }
+    ul.culture li>a{
+      color:rgba(0,0,0,0.8);
+    }
     /*3、、图片分类导航*/
     ul.clist{
       width: 100%;
       height: 90px;
+      display: table;
+      border-bottom:8px solid #eeeeee;
     }
     ul.clist li{
-      float: left;
+      display: table-cell;
+      text-align: center;
+      font-size:12px;
+      color:rgba(0,0,0,0.8);
     }
     ul.clist li img{
       width: 48px;
@@ -106,13 +132,20 @@
       <img ng-src="{{banner}}">
     </ion-slide>
   </ion-slide-box>
+    <!--轮播下面的企业小列表小导航-->
+  <ul class="culture">
+    <li>认证龙头企业</li>
+    <li>12年品牌</li>
+    <li>3小时送达</li>
+    <li>最近 <a href="">111</a>条好评</li>
+  </ul>
     <!--3、图片分类导航-->
-    <!--<ul class="clist">-->
-      <!--<li ng-repeat="list in classlist">-->
-        <!--<img ng-src="{{list.src}}">-->
-        <!--<p>{{list.title}}</p>-->
-      <!--</li>-->
-    <!--</ul>-->
+    <ul class="clist">
+      <li ng-repeat="list in classlist" ng-click="goThisclass(list.title)">
+        <img ng-src="{{list.src}}">
+        <p>{{list.title}}</p>
+      </li>
+    </ul>
     <!--4、精选特惠-->
     <!--5、鲜花精选-->
     <!--6、永生花、蛋糕、礼品精选-->

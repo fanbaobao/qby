@@ -50,6 +50,7 @@ angular.module('starter.services', [])
 })
 .factory('Dash', function($http) {
     var bannerBlank=[];
+    var arr=[{'name':'y'},{'name':'d'},{'name':'a'},{'name':'d'}];
     return {
       bannerTop:function () {
         $http.get('http://192.168.3.147:3000/banner').then(
@@ -61,10 +62,15 @@ angular.module('starter.services', [])
                 }
               }
             }
-            return bannerBlank;
             console.log(bannerBlank);
+            // return bannerBlank;
           }
+
         )
+        // return bannerBlank;
+      },
+      a:function () {
+        return arr;
       },
     }
   })

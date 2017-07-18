@@ -1,7 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope,Dash) {
+.controller('DashCtrl', function($scope,Dash,$window) {
   $scope.bannerT=Dash.bannerTop();
+  console.log($scope.bannerT);
+  //搜索框获取焦点时，处理跳转到分类页面
+  $scope.goClass=function () {
+    $window.location.href='../templates/tab-chats.html';
+  }
+  //点击登录时，处理跳转到登录页面
+  $scope.geLogin=function () {
+
+  }
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -14,6 +23,7 @@ angular.module('starter.controllers', [])
   //});
 
   $scope.chats = Chats.all();
+  // console.log( $scope.chats);
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };

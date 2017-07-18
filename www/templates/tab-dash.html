@@ -8,7 +8,7 @@
 
   <title>使用ionic中ion-slide-box实现移动app轮播特效</title>
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0,user-scalable=no,width=device-width" />
-  <!--<link rel="stylesheet" href="css/ionic.css" />-->
+  <link rel="stylesheet" href="../lib/ionic/css/ionic.min.css" />
   <script type="text/javascript"src="../lib/ionic/js/ionic.bundle.min.js"></script>
   <style>
     img{
@@ -28,28 +28,21 @@
     <!--<input type="text">-->
 
   <!--</ion-title>-->
+  <ion-content>
+    <!--头部banner轮播-->
+    <ion-slide-box active-slide="model.activeIndex"
+                   does-continue="true" slide-interval="4000" auto-play="true"
+                   show-pager="true" pager-click="toSlideIndex(index)"
+                   on-tap="stopOrStart()">
+      <ion-slide>
+        <img src="../img/adam.jpg" />
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
 
 </ion-header-bar>
 
-<ion-content>
-  <!--头部banner轮播-->
-  <ion-slide-box active-slide="model.activeIndex"
-                 does-continue="true" slide-interval="4000" auto-play="true"
-                 show-pager="true" pager-click="toSlideIndex(index)"
-                 on-tap="stopOrStart()">
-    <ion-slide>
-      <img src="../img/adam.jpg" />
-    </ion-slide>
-    <ion-slide>
-      <img src="../img/logo.png" />
-    </ion-slide>
-    <ion-slide>
-      <img src="../img/mike.png" />
-    </ion-slide>
-  </ion-slide-box>
-</ion-content>
 
-</ion-content>
 
 <!--<ion-footer-bar class="bar-positive"></ion-footer-bar>-->
 

@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
     $window.location.href='../templates/tab-chats.html';
   }
   //点击登录时，处理跳转到登录页面
-  $scope.geLogin=function () {
+  $scope.goLogin=function () {
 
   }
 })

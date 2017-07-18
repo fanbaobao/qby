@@ -1,4 +1,10 @@
 <style>
+  ul{
+    list-style-type:none;
+  }
+  a{
+    text-decoration: none;
+  }
   .bar.bar-positive{
     background-color: rgba(250,250,250,.9);
 
@@ -50,6 +56,41 @@
     margin:5px auto;
     border-radius:5px;
   }
+  nav ul{
+    display: -webkit-box;
+  }
+  nav ul li{
+    -webkit-box-flex: 1;
+    box-sizing: border-box;
+    border-right:1px solid #cccccc;
+    height:79px;
+    background-color: lightgoldenrodyellow;
+  }
+  nav ul li a{
+    display: block;
+    width:44.8px;
+    height:44.8px;
+    background:url("../img/mine/Icon_obligation.png") center center no-repeat;
+    -webkit-background-size:80%;
+    background-size:80%;
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-60%);
+  }
+  nav ul li a:nth-child(2) a{
+    background-image:url("../img/mine/Icon_distribution.png");
+  }
+  nav ul li a:nth-child(3) a{
+    background-image:url("../img/mine/Icon_evaluate.png");
+  }
+  nav ul li a::after{
+    content: '代付款';
+    position: absolute;
+    top:37px;
+    font-size:14px;
+    color: #666666;
+  }
 </style>
 <ion-header-bar align-title="center" class="bar-positive">
   <a class="button icon-left ion-chevron-left button-clear button-dark"></a>
@@ -68,6 +109,9 @@
   <nav>
     <div class="inner_c">
       <ul>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
         <li><a href="#"></a></li>
       </ul>
     </div>

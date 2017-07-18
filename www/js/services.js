@@ -61,13 +61,11 @@ angular.module('starter.services', [])
                   bannerBlank.push(res.data.data[i].src);
                 }
               }
+              console.log(bannerBlank);
+              // return bannerBlank;
             }
-            console.log(bannerBlank);
-            // return bannerBlank;
-          }
-
-        )
-        // return bannerBlank;
+          })
+        return bannerBlank;
       },
       a:function () {
         return arr;

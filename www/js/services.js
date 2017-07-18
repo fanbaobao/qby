@@ -62,12 +62,11 @@ angular.module('starter.services', [])
                 }
               }
             }
-            console.log(bannerBlank);
-            // return bannerBlank;
+            // console.log(bannerBlank);
           }
 
         )
-        // return bannerBlank;
+        return bannerBlank;
       },
       a:function () {
         return arr;

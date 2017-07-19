@@ -76,6 +76,7 @@
     }
     .bannerTlunbo .slider-pager .slider-pager-page {
       position: relative;
+      bottom: 0px;
     }
     /*头部轮播下面的企业小列表*/
     ul.culture{
@@ -158,7 +159,7 @@
       width: 130px;
       height: 141px;
     }
-  /*4 、鲜花精选*/
+    /*4 、鲜花精选*/
     ul.xianhua{
       width: 400px;
       margin:0 auto;
@@ -232,7 +233,7 @@
   </style>
   <script src="../lib/ionic/js/ionic.bundle.min.js"></script>
   <ion-content>
-  <!--1，头部导航-->
+    <!--1，头部导航-->
     <header>
       <div class="logo"></div>
       <nav>
@@ -243,23 +244,23 @@
       </div>
     </header>
 
-  <!--2，头部banner轮播-->
-  <ion-slide-box ng-if="bannerT" active-slide="model.activeIndex"
-                 does-continue="true" slide-interval="4000" auto-play="true"
-                 show-pager="true" pager-click="toSlideIndex(index)"
-                 on-tap="stopOrStart()" class="bannerTlunbo">
-    <ion-slide ng-repeat="banner in bannerT">
-      <img ng-src="{{banner.src}}">
-      <div></div>
-    </ion-slide>
-  </ion-slide-box>
+    <!--2，头部banner轮播-->
+    <ion-slide-box ng-if="bannerT" active-slide="model.activeIndex"
+                   does-continue="true" slide-interval="4000" auto-play="true"
+                   show-pager="true" pager-click="toSlideIndex(index)"
+                   on-tap="stopOrStart()" class="bannerTlunbo">
+      <ion-slide ng-repeat="banner in bannerT">
+        <img ng-src="{{banner.src}}">
+        <div></div>
+      </ion-slide>
+    </ion-slide-box>
     <!--轮播下面的企业小列表小导航-->
-  <ul class="culture">
-    <li>认证龙头企业</li>
-    <li>12年品牌</li>
-    <li>3小时送达</li>
-    <li>最近 <a href="">111</a>条好评</li>
-  </ul>
+    <ul class="culture">
+      <li>认证龙头企业</li>
+      <li>12年品牌</li>
+      <li>3小时送达</li>
+      <li>最近 <a href="">111</a>条好评</li>
+    </ul>
     <!--3、图片分类导航-->
     <ul class="clist">
       <li ng-repeat="list in classlist" ng-click="goThisclass(list.title)">
@@ -341,5 +342,5 @@
       <p>Copyright © 2005~2017 花礼网(中国鲜花礼品网) 版权所有</p>
     </footer>
 
-</ion-content>
+  </ion-content>
 </ion-view>

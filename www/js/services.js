@@ -49,49 +49,22 @@ angular.module('starter.services', [])
   };
 })
 .factory('Dash', function($http) {
-    var bannerBlank=[];
-    var good=[];
-    var xianhuan=[];
     return {
       bannerTop:function () {
-        $http.get('http://192.168.3.147:3000/banner').then(
-          function (res) {
-            if(res.data.success){
-              for(var i=0;i<res.data.data.length;i++){
-                if(res.data.data[i].flag==0){
-                  bannerBlank.push(res.data.data[i].src);
-                }
-              }
-            }
-          }
-        )
-        return bannerBlank;
-      },
+        return $http.get('http://192.168.3.147:3000/banner').then(
+          function (res) {return res;}
+          )},
       tehui:function () {
-        $http.get('http://192.168.3.147:3000/goods').then(
-          function (res) {
-            if(res.data.success){
-              for(var i=0;i<res.data.data.length;i++){
-                good.push(res.data.data[i]);
-              }
-            }
-            console.log(good);
-          }
-        )
-        return good;
-      },
+        return $http.get('http://192.168.3.147:3000/goods').then(
+          function (res) {return res;}
+        )},
       jingxuan:function () {
-        $http.get('http://192.168.3.147:3000/xhjx').then(
-          function (res) {
-            if(res.data.success){
-              for(var i=0;i<res.data.data.length;i++){
-                xianhuan.push(res.data.data[i]);
-              }
-            }
-            console.log(xianhuan);
-          }
-        )
-        return xianhuan;
-      },
+        return $http.get('http://192.168.3.147:3000/xhjx').then(
+          function (res) { return res;}
+        )},
+      bannerBot:function () {
+        return $http.get('http://192.168.3.147:3000/banner').then(
+          function (res) {return res;}
+        )},
     }
   })

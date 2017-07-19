@@ -81,6 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 //  我的
   .state('tab.mine', {
+    cache:false,
     url: '/mine',
     views: {
       'tab-mine': {

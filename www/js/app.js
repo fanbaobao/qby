@@ -98,6 +98,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    .state('tab.mine-slogin', {
+      url: '/mine/slogin',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-slogin.html',
+          controller: 'MineSloginCtrl'
+        }
+      }
+    })
+    .state('tab.mine-login-user', {
+      url: '/mine/ulogin',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-login-user.html',
+          controller: 'MineloginUserCtrl'
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

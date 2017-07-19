@@ -2,11 +2,6 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope,Dash,$window) {
   $scope.bannerT=Dash.bannerTop();
-
-  $scope.good=Dash.tehui();
-
-  $scope.xianhua=Dash.jingxuan();
-
   $scope.classlist=[
     {title:'鲜花',src:'../img/dash/xianhua_icon.png'},
     {title:'永生花',src:'../img/dash/yongshenghua_icon.png'},
@@ -61,6 +56,11 @@ angular.module('starter.controllers', [])
 })
 //我的
   .controller('MineCtrl', function($scope) {
+    $scope.settings = {
+      enableFriends: true
+    }
+  })
+  .controller('MineLoginCtrl', function($scope) {
     $scope.settings = {
       enableFriends: true
     }

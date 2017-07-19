@@ -150,9 +150,14 @@ angular.module('starter.controllers', [])
         })
     }
   })
-  .controller('MineloginUserCtrl', function($scope,$ionicHistory) {
+  .controller('MineloginUserCtrl', function($scope,$ionicHistory,$window) {
     $scope.go = function(){
       $ionicHistory.goBack();
+    }
+    $scope.exit = function(){
+      localStorage.removeItem('name');
+      localStorage.removeItem('id');
+      $window.location.href='#/tab/mine';
     }
   })
 

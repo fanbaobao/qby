@@ -95,3 +95,24 @@ angular.module('starter.services', [])
       },
     }
   })
+  .factory('Login', function($http) {
+    return{
+      panduanLogin:function(id,pwd){
+        return $http.post('http://192.168.3.147:3000/login',{id:id,password:pwd}).then(function(res){
+            return res.data;
+        })
+      }
+    }
+
+  })
+.factory('newuser', function($http) {
+    return{
+      Zhuce:function(id,name,pwd){
+        return $http.post('http://192.168.3.147:3000/newuser',{id:id,name:name,password:pwd}).then(function(res){
+          console.log(res.data);
+          return res.data;
+        })
+      }
+    }
+
+  })

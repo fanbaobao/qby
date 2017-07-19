@@ -88,3 +88,13 @@ angular.module('starter.services', [])
     }
 
   })
+  .factory('alert', function($http) {
+    return{
+      Alter:function(id,oldpwd,newpwd){
+        return $http.put('http://192.168.3.147:3000/alert',{id:id,oldpwd:oldpwd,newpwd:newpwd}).then(function(res){
+          return res.data;
+        })
+      }
+    }
+
+  })

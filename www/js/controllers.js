@@ -108,7 +108,6 @@ angular.module('starter.controllers', [])
 })
 //我的
   .controller('MineCtrl', function($scope) {
-    $scope.notes_id = localStorage.getItem('id');
     $scope.notes_name = localStorage.getItem('name');
     console.log($scope.notes_id);
     console.log($scope.notes_name);
@@ -159,6 +158,22 @@ angular.module('starter.controllers', [])
       localStorage.removeItem('id');
       $window.location.href='#/tab/mine';
     }
+  })
+  .controller('MineloginUserAlterCtrl', function($scope,$ionicHistory,alert) {
+    $scope.notes_name = localStorage.getItem('name');
+    $scope.notes_id = localStorage.getItem('id');
+    $scope.suc = true;
+      $scope.go = function(){
+        $ionicHistory.goBack();
+      }
+      $scope.pwdUpdate = function(user){
+        alert.Alter($scope.notes_id,user.oldpwd,user.newpwd)
+          .then(function(result){
+            $scope.suc = result.success;
+            console.log($scope.suc);
+          })
+      }
+
   })
 
 

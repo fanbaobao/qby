@@ -81,32 +81,17 @@ angular.module('starter.services', [])
         return good;
       },
       jingxuan:function () {
-        return $http.get('http://192.168.3.147:3000/xhjx').then(
+        $http.get('http://192.168.3.147:3000/xhjx').then(
           function (res) {
-              return res.data
+            if(res.data.success){
+              for(var i=0;i<res.data.data.length;i++){
+                xianhuan.push(res.data.data[i]);
+              }
+            }
+            console.log(xianhuan);
           }
         )
+        return xianhuan;
       },
-    }
-  })
-  .factory('Login',function($http){
-    return{
-      panduanLogin:function (id,pwd) {
-        // console.log(pwd);
-        return $http.post('http://192.168.3.147:3000/login',{id:id,password:pwd}).then(function(res){
-          return res.data;
-        })
-
-      }
-    }
-  })
-  .factory('newuser',function($http){
-    return{
-      Zhuce:function (id,name,pwd) {
-        return $http.post('http://192.168.3.147:3000/newuser',{id:id,name:name,password:pwd}).then(function(res){
-          return res.data;
-        })
-
-      }
     }
   })

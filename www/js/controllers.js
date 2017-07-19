@@ -108,13 +108,51 @@ angular.module('starter.controllers', [])
 })
 //我的
   .controller('MineCtrl', function($scope) {
-    $scope.settings = {
-      enableFriends: true
+    $scope.notes_id = localStorage.getItem('id');
+    $scope.notes_name = localStorage.getItem('name');
+    console.log($scope.notes_id);
+    console.log($scope.notes_name);
+  })
+  .controller('MineLoginCtrl', function($scope,$ionicHistory,Login,$window) {
+    $scope.info = '登陆'
+    $scope.go = function(){
+      $ionicHistory.goBack();
+    }
+    $scope.Login = function(user){
+      $scope.info = '正在登陆...'
+      Login.panduanLogin(user.name,user.pwd)
+        .then(function(result){
+          console.log(result);
+          if (result.success){
+            $scope.info = '登陆成功';
+            localStorage.setItem('name',result.name);
+            localStorage.setItem('id',result.id);
+            $window.location.href='#/tab/mine';
+          }
+        });
     }
   })
-  .controller('MineLoginCtrl', function($scope) {
-    $scope.settings = {
-      enableFriends: true
+  .controller('MineSloginCtrl', function($scope,$ionicHistory,newuser,$window) {
+    $scope.info = '注册';
+    $scope.go = function(){
+      $ionicHistory.goBack();
+    }
+    $scope.zhuce = function(user){
+      $scope.info = '正在注册，请稍后..';
+      console.log(user);
+      newuser.Zhuce(user.id,user.name,user.pwd)
+        .then(function(result){
+          console.log(result);
+          if (result.success){
+            $scope.info = '注册成功';
+            $window.location.href='#/tab/mine/login';
+          }
+        })
+    }
+  })
+  .controller('MineloginUserCtrl', function($scope,$ionicHistory) {
+    $scope.go = function(){
+      $ionicHistory.goBack();
     }
   })
 

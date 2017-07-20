@@ -126,7 +126,7 @@
       text-align: center;
     }
     ul.tehui{
-      width: 1100px;
+      width: 1000px;
       position: relative;
     }
     ul.tehui li{
@@ -161,23 +161,22 @@
     }
     /*4 、鲜花精选*/
     ul.xianhua{
-      width: 400px;
+      width: 316px;
       margin:0 auto;
     }
     ul.xianhua li{
-      width: 168px;
+      width: 140px;
       height: 247px;
       margin-right: 8px;
       border:1px solid #ccc;
     }
     ul.xianhua li p{
-      width: 168px;
+      width: 140px;
       position: relative;
       top:36px;
     }
     ul.xianhua li img{
       position: relative;
-      left:20px;
       top:20px;
     }
     p.material{
@@ -254,6 +253,7 @@
         <div></div>
       </ion-slide>
     </ion-slide-box>
+
     <!--轮播下面的企业小列表小导航-->
     <ul class="culture">
       <li>认证龙头企业</li>
@@ -261,6 +261,7 @@
       <li>3小时送达</li>
       <li>最近 <a href="">111</a>条好评</li>
     </ul>
+
     <!--3、图片分类导航-->
     <ul class="clist">
       <li ng-repeat="list in classlist" ng-click="goThisclass(list.title)">
@@ -268,6 +269,7 @@
         <p>{{list.title}}</p>
       </li>
     </ul>
+
     <!--4、精选特惠-->
     <p class="tehui_p">————精选特惠————</p>
     <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x">
@@ -276,13 +278,14 @@
           <li ng-repeat="gd in good" ng-click="sale(id)">
             <img ng-src="{{gd.src}}"><br>
             <p>{{gd.title}}</p>
-            <p><span>￥{{gd.pre_price}}</span><span style="color:rgba(0,0,0,0.5);"><del>￥{{gd.now_price}}</del></span></p>
+            <p><span>￥{{gd.now_price}}</span><span style="color:rgba(0,0,0,0.5);"><del>￥{{gd.pre_price}}</del></span></p>
             <div ng-show="gd.class=='新品上市'" class="show">新品</div>
           </li>
         </ul>
       </div>
     </ion-scroll>
     <div style="width: 100%;height: 8px;background: #eee;margin-top:6px;"></div>
+
     <!--5、鲜花精选-->
     <div>
       <p class="tehui_p">————鲜花精选————</p>
@@ -290,17 +293,83 @@
         <li ng-repeat="gd in xianhua" ng-click="sale(id)">
           <img ng-src="{{gd.src}}"><br>
           <p>{{gd.title}}</p>
-          <p class="material" style="height: 16px;">{{gd.material}}</p>
-          <p>￥{{gd.pre_price}}</p>
+          <p class="material" style="height: 16px;">{{gd.desc}}</p>
+          <p>￥{{gd.now_price}}</p>
         </li>
       </ul>
       <div style="clear: both;"></div>
       <div class="allxianhua" ng-click="goMore()">
-        全部鲜花 &nbsp;&nbsp;>
+        全部鲜花&nbsp;&nbsp;〉
       </div>
     </div>
-    <!--6、永生花、蛋糕、礼品精选-->
 
+    <!--6、永生花、蛋糕、礼品精选-->
+    <div>
+      <div style="position: relative;">
+        <h4 style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);color: white;">•&nbsp;永生花精选&nbsp;•</h4>
+        <img ng-src="http://img02.hua.com/slider/teji_banner_yongshenghua.jpg">
+      </div>
+      <div class="row">
+        <div class="col"><span>热销精选</span></div>
+        <div class="col " align="right"><span>更多〉</span></div>
+      </div>
+      <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
+        <div style="width:1200px;">
+          <ul class="tehui" style="width:1200px;">
+            <li ng-repeat="gd in ysh" ng-click="sale(id)">
+              <img ng-src="{{gd.src}}"><br>
+              <p>{{gd.title}}</p>
+              <p><span>￥{{gd.now_price}}</span></p>
+              <div ng-show="gd.class=='新品上市'" class="show">新品</div>
+            </li>
+          </ul>
+        </div>
+      </ion-scroll>
+    </div>
+    <div>
+      <div style="position: relative;">
+        <h4 style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);color: white;">•&nbsp;蛋糕精选&nbsp;•</h4>
+        <img ng-src="http://img02.hua.com/m/icon/cake_banner.jpg">
+      </div>
+      <div class="row">
+        <div class="col"><span>送至:</span><span style="color: orange">▽洛阳</span></div>
+        <div class="col " align="right"><span>更多〉</span></div>
+      </div>
+      <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
+        <div style="width:1400px;">
+          <ul class="tehui" style="width:1400px;">
+            <li ng-repeat="gd in dg" ng-click="sale(id)">
+              <img ng-src="{{gd.src}}"><br>
+              <p>{{gd.title}}</p>
+              <p><span>￥{{gd.now_price}}</span></p>
+              <div ng-show="gd.class=='新品上市'" class="show">新品</div>
+            </li>
+          </ul>
+        </div>
+      </ion-scroll>
+    </div>
+    <div>
+      <div style="position: relative;">
+        <h4 style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);color: white;">•&nbsp;永生花精选&nbsp;•</h4>
+        <img ng-src="http://img02.hua.com/slider/banner_gift01.png">
+      </div>
+      <div class="row">
+        <div class="col"><span>热销精选</span></div>
+        <div class="col " align="right"><span>更多〉</span></div>
+      </div>
+      <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
+        <div style="width:1400px;">
+          <ul class="tehui" style="width:1400px;">
+            <li ng-repeat="gd in lp" ng-click="sale(id)">
+              <img ng-src="{{gd.src}}"><br>
+              <p>{{gd.title}}</p>
+              <p><span>￥{{gd.now_price}}</span></p>
+              <div ng-show="gd.class=='新品上市'" class="show">新品</div>
+            </li>
+          </ul>
+        </div>
+      </ion-scroll>
+    </div>
     <!--7、行业龙头等等-->
     <ul class="clist">
       <li ng-repeat="list in culturelist" ng-click="goThisclass(list.title)" ng-class="a+i">

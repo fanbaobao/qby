@@ -12,7 +12,7 @@ angular.module('starter.controllers', [])
           }
         }
       }
-      console.log($scope.bannerT);
+      // console.log($scope.bannerT);
       return ($scope.bannerT);
     }
   );
@@ -25,6 +25,7 @@ angular.module('starter.controllers', [])
   );
   Dash.jingxuan().then(
     function (result) {
+      console.log(result.data.data);
       if(result.data.success){
         $scope.xianhua=result.data.data;
       }
@@ -40,10 +41,29 @@ angular.module('starter.controllers', [])
           }
         }
       }
-      console.log($scope.bannerB);
+      // console.log($scope.bannerB);
       return ($scope.bannerB);
     }
   );
+  Dash.jingxuanlist().then(
+    function (result) {
+      $scope.ysh=[],$scope.dg=[],$scope.lp=[];
+      console.log(result.data);
+      if(result.data.success){
+        $scope.jxlist=result.data.data;
+        for(var i=0;i<result.data.data.length;i++){
+          if(result.data.data[i].name=='永生花'){
+            $scope.ysh.push(result.data.data[i]);
+          }else if(result.data.data[i].name=='蛋糕'){
+            $scope.dg.push(result.data.data[i]);
+          }else if(result.data.data[i].name=='礼品'){
+            $scope.lp.push(result.data.data[i]);
+          }
+        }
+      }
+    }
+  );
+
   $scope.classlist=[
     {title:'鲜花',src:'../img/dash/xianhua_icon.png'},
     {title:'永生花',src:'../img/dash/yongshenghua_icon.png'},
@@ -57,7 +77,11 @@ angular.module('starter.controllers', [])
     {title:'3小时送达',src:'../img/dash/brand_icon03.png'},
     {title:'送钱实拍',src:'../img/dash/brand_icon04.png'}
   ];
-  // console.log($scope.bannerT);
+  $scope.jlist=[
+    {src:'http://img02.hua.com/slider/teji_banner_yongshenghua.jpg',flag:'ysh'},
+    {src:'http://img02.hua.com/m/icon/cake_banner.jpg',flag:'dg'},
+    {src:'http://img02.hua.com/slider/banner_gift01.png',flag:'lp'}
+  ];
   //搜索框获取焦点时，处理跳转到分类页面
   $scope.goClass=function () {
     $window.location.href='../templates/tab-chats.html';

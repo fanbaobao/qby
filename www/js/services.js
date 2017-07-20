@@ -66,6 +66,10 @@ angular.module('starter.services', [])
         return $http.get('http://192.168.3.147:3000/banner').then(
           function (res) {return res;}
         )},
+      jingxuanlist:function () {
+        return $http.get('http://192.168.3.147:3000/jingxuan').then(
+          function (res) {return res;}
+        )},
     }
   })
 .factory('Login', function($http) {

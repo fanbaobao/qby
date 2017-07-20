@@ -81,6 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 //  我的
   .state('tab.mine', {
+    cache:false,
     url: '/mine',
     views: {
       'tab-mine': {
@@ -113,6 +114,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-mine': {
           templateUrl: 'templates/mine-login-user.html',
           controller: 'MineloginUserCtrl'
+        }
+      }
+    })
+    .state('tab.mine-login-user-alter', {
+      url: '/mine/ualogin',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-login-user-alter.html',
+          controller: 'MineloginUserAlterCtrl'
         }
       }
     })

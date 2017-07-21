@@ -99,9 +99,10 @@ angular.module('starter.controllers', [])
 
   }
 
-  //点击进入该商品的卖场
+  //点击进入该商品详情
   $scope.sale=function (id) {
-
+    $scope.Id = id.id
+    $window.location.href='#/tab/dash/dashdetail/'+$scope.Id;
   }
 })
 
@@ -131,74 +132,196 @@ angular.module('starter.controllers', [])
   }
 })
 //我的
-  .controller('MineCtrl', function($scope) {
-    $scope.notes_name = localStorage.getItem('name');
-    console.log($scope.notes_id);
-    console.log($scope.notes_name);
-  })
-  .controller('MineLoginCtrl', function($scope,$ionicHistory,Login,$window) {
-    $scope.info = '登陆'
+.controller('MineCtrl', function($scope,$window) {
+  $scope.notes_name = localStorage.getItem('name');
+ $scope.Href = function(href){
+   if($scope.notes_name){
+     $window.location.href = href;
+   }else{
+     $window.location.href= '#/tab/mine/login'
+   }
+ }
+
+})
+//登录成功
+.controller('MineLoginCtrl', function($scope,$ionicHistory,Login,$window) {
+  $scope.suc='true';
+  $scope.info = '登陆'
+  $scope.go = function(){
+    $ionicHistory.goBack();
+  }
+  $scope.Login = function(user){
+    $scope.info = '正在登陆...'
+    console.log(user);
+     if (user){
+       Login.panduanLogin(user.name,user.pwd)
+         .then(function(result){
+           console.log(result);
+           if (result.success){
+             $scope.info = '登陆成功';
+             localStorage.setItem('name',result.name);
+             localStorage.setItem('id',result.id);
+             $window.location.href='#/tab/mine';
+           }else{
+             $scope.info = '登陆';
+             $scope.suc=result.success;
+           }
+       });
+     }else{
+       alert('用户名或密码不能为空');
+       $scope.info = '登陆';
+     }
+
+  }
+})
+//注册用户
+.controller('MineSloginCtrl', function($scope,$ionicHistory,Login,$window) {
+  $scope.info = '注册';
+  $scope.go = function(){
+    $ionicHistory.goBack();
+  }
+  $scope.zhuce = function(user){
+    $scope.info = '正在注册，请稍后..';
+    Login.Zhuce(user.id,user,name,user.pwd)
+      .then(function(result){
+        console.log(result);
+        if (result.success){
+          $scope.user={};
+          $scope.info = '注册成功';
+          alert($scope.info);
+          user='';
+          $window.location.href='#/tab/mine/login';
+        }
+      })
+  }
+})
+//退出登录
+.controller('MineloginUserCtrl', function($scope,$ionicHistory,$window) {
+  $scope.go = function(){
+    $ionicHistory.goBack();
+  }
+  $scope.exit = function(){
+    localStorage.removeItem('name');
+    localStorage.removeItem('id');
+    $window.location.href='#/tab/mine';
+  }
+})
+//修改密码
+.controller('MineloginUserAlterCtrl', function($scope,$ionicHistory,Login,$window) {
+  $scope.notes_name = localStorage.getItem('name');
+  $scope.notes_id = localStorage.getItem('id');
+  $scope.suc = true;
     $scope.go = function(){
       $ionicHistory.goBack();
     }
-    $scope.Login = function(user){
-      $scope.info = '正在登陆...'
-      Login.panduanLogin(user.name,user.pwd)
+    $scope.pwdUpdate = function(user){
+      Login.Alter($scope.notes_id,user.oldpwd,user.newpwd)
         .then(function(result){
-          console.log(result);
-          if (result.success){
-            $scope.info = '登陆成功';
-            localStorage.setItem('name',result.name);
-            localStorage.setItem('id',result.id);
-            $window.location.href='#/tab/mine';
-          }
-        });
-    }
-  })
-  .controller('MineSloginCtrl', function($scope,$ionicHistory,newuser,$window) {
-    $scope.info = '注册';
-    $scope.go = function(){
-      $ionicHistory.goBack();
-    }
-    $scope.zhuce = function(user){
-      $scope.info = '正在注册，请稍后..';
-      console.log(user);
-      newuser.Zhuce(user.id,user.name,user.pwd)
-        .then(function(result){
-          console.log(result);
-          if (result.success){
-            $scope.info = '注册成功';
-            $window.location.href='#/tab/mine/login';
-          }
+          $scope.suc = result.success;
+          localStorage.removeItem('name');
+          localStorage.removeItem('id');
+          $window.location.href='#/tab/mine';
         })
     }
+
+})
+//代付款
+.controller('MinePaymentCtrl', function($scope,$ionicHistory,PaymentPay) {
+  $scope.go = function () {
+    $ionicHistory.goBack();
+  }
+  PaymentPay.payment(localStorage.getItem('id')).then(function(result){
+    console.log(result);
+    if (result.length == 0){
+      $scope.suc=true;
+    }else{
+      $scope.paymentList = result;
+      console.log( $scope.paymentList)
+    }
   })
-  .controller('MineloginUserCtrl', function($scope,$ionicHistory,$window) {
-    $scope.go = function(){
+})
+//代付款订单详情
+.controller('MinePaymentDetailCtrl', function($scope,$ionicHistory,$stateParams,PaymentPay,$window) {
+  $scope.go = function () {
+    $ionicHistory.goBack();
+  }
+  PaymentPay.paymentpay($stateParams.order_number).then(function(result){
+      $scope.paymentList = result;
+      console.log($scope.paymentList)
+  })
+  $scope.cancel = function(){
+   if (confirm('确定要取消此订单吗？')){
+     PaymentPay.paycancel($stateParams.order_number).then(function(result){
+       console.log(result.success)
+       if (result.success){
+         $window.location.href='#/tab/mine/Payment';
+       }
+     })}
+  }
+  $scope.pay = function(){
+    PaymentPay.pay($stateParams.order_number).then(function(result){
+      console.log(result.success)
+      if (result.success){
+        alert('支付成功！')
+        $window.location.href='#/tab/mine/Payment';
+      }
+    })
+  }
+})
+//全部订单
+.controller('MineallorderCtrl', function($scope,$ionicHistory,$stateParams,Order,$window) {
+    $scope.paymentList = [];
+    $scope.go = function () {
       $ionicHistory.goBack();
     }
-    $scope.exit = function(){
-      localStorage.removeItem('name');
-      localStorage.removeItem('id');
-      $window.location.href='#/tab/mine';
+    Order.orders(localStorage.getItem('id')).then(function(result){
+      if (result.length == 0){
+        $scope.suc=true;
+      }else{
+        for (var i = 0;i<result.length;i++){
+          $scope.paymentList.push(result[i]);
+        }
+      }
+    })
+    $scope.deleteorder = function(id){
+      $scope.id = id.order_number;
+      Order.deleteorders($scope.id).then(function(result){
+        if (result.success){
+          $scope.paymentList.splice($scope.paymentList.indexOf($scope.id)+1,1);
+        }
+      })
+    }
+})
+//全部订单详情
+.controller('MineorderdetailsCtrl', function($scope,$ionicHistory,$stateParams,Order,$window) {
+    $scope.go = function () {
+      $ionicHistory.goBack();
+    }
+    Order.orderdetails($stateParams.order_number).then(function(result){
+      $scope.paymentList = result;
+    })
+    $scope.deleteorder = function(){
+      Order.deleteorders($stateParams.order_number).then(function(result){
+        if (result.success){
+          alert('删除成功！')
+          $window.location.href='#/tab/mine/allorder';
+        }
+      })
     }
   })
-  .controller('MineloginUserAlterCtrl', function($scope,$ionicHistory,alert) {
-    $scope.notes_name = localStorage.getItem('name');
-    $scope.notes_id = localStorage.getItem('id');
-    $scope.suc = true;
-      $scope.go = function(){
-        $ionicHistory.goBack();
-      }
-      $scope.pwdUpdate = function(user){
-        alert.Alter($scope.notes_id,user.oldpwd,user.newpwd)
-          .then(function(result){
-            $scope.suc = result.success;
-            console.log($scope.suc);
-          })
-      }
+//商品详情
+.controller('dashDetailCtrl', function($scope,$ionicHistory,Dash,$stateParams,$window) {
+    $scope.go = function () {
+      $ionicHistory.goBack();
+    }
+    console.log($stateParams.dashId)
+    Dash.Dashdetail($stateParams.dashId).then(function(result){
+      $scope.detail = result;
+      console.log($scope.detail);
+    })
 
-  })
+})
+
 
 
 

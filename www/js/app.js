@@ -50,7 +50,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-
+    .state('tab.dash-detail', {
+      cache:false,
+      url: '/dash/dashdetail/:dashId',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/dash-detail.html',
+          controller: 'dashDetailCtrl'
+        }
+      }
+    })
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -99,6 +108,46 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    .state('tab.mine-allorder', {
+      cache:false,
+      url: '/mine/allorder',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-allorders.html',
+          controller: 'MineallorderCtrl'
+        }
+      }
+    })
+    .state('tab.mine-allorder-orderdetails', {
+      cache:false,
+      url: '/mine/orderdetails/:order_number',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-allorders-orderdetails.html',
+          controller: 'MineorderdetailsCtrl'
+        }
+      }
+    })
+    .state('tab.mine-Payment', {
+      cache:false,
+      url: '/mine/Payment',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-Payment.html',
+          controller: 'MinePaymentCtrl'
+        }
+      }
+    })
+    .state('tab.mine-Payment-pay', {
+      cache:false,
+      url: '/mine/Payment/:order_number',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-Payment-pay.html',
+          controller: 'MinePaymentDetailCtrl'
+        }
+      }
+    })
     .state('tab.mine-slogin', {
       url: '/mine/slogin',
       views: {
@@ -126,6 +175,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

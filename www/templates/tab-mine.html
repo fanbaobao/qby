@@ -7,6 +7,10 @@
   }
   .bar.bar-positive{
     background-color: rgba(250,250,250,.9);
+    background-image: linear-gradient(0deg, #f9f8f8, #f9f8f8 50%, transparent 50%);
+  }
+  .bar.bar-positive{
+    background-color: #f9f8f8;
 
   }
   .bar.bar-positive .title{
@@ -58,6 +62,8 @@
   }
   nav ul{
     display: -webkit-box;
+    background-color: #ffffff;
+    margin-bottom:10px;
   }
   nav ul li{
     -webkit-box-flex: 1;
@@ -106,10 +112,8 @@
   nav ul li:nth-child(4) a::after{
     content: '全部订单';
   }
-  section .inner_c{
-    background-color: rgb(240,239,237);
-    padding:10px 0 0 0;
-    height:335px;
+  .scroll-content {
+    background-color: rgb(240, 239, 237);
   }
   section .inner_c .nav{
     /*background-color: red;*/
@@ -235,10 +239,10 @@
   <nav>
     <div class="inner_c">
       <ul>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
+        <li><a ng-click="Href('#/tab/mine/Payment')"></a></li>
+        <li><a ng-click="Href('#/tab/mine/ulogin')"></a></li>
+        <li><a ng-click="Href('#/tab/mine/ulogin')"></a></li>
+        <li><a ng-click="Href('#/tab/mine/allorder')"></a></li>
       </ul>
     </div>
   </nav>
@@ -246,22 +250,22 @@
     <div class="inner_c">
       <div class="nav">
         <div class="row row1">
-          <div class="col"><a href="#"></a></div>
-          <div class="col"><a href="#"></a></div>
-          <div class="col"><a href="#"></a></div>
-          <div class="col"><a href="#"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
         </div>
         <div class="row row2">
-          <div class="col"><a href="#"></a></div>
-          <div class="col"><a href="#"></a></div>
-          <div class="col"><a href="#"></a></div>
-          <div class="col"><a href="#"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
+          <div class="col"><a ng-click="Href('#/tab/mine/ulogin')"></a></div>
         </div>
       </div>
       <ion-list>
         <ion-item class="item-remove-animate item-avatar item-icon-right wrap"
                   type="item-text-wrap"
-                  href="#/tab/mine/ulogin">
+                ng-click="Href('#/tab/mine/ulogin')">
           <h2 class="zh">账户管理</h2>
           <p class="right-desc">管理个人资料、收货地址</p>
           <i class="icon ion-chevron-right icon-accessory"></i>

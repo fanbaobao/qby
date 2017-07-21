@@ -70,35 +70,81 @@ angular.module('starter.services', [])
         return $http.get('http://192.168.3.147:3000/jingxuan').then(
           function (res) {return res;}
         )},
+      Dashdetail:function(id){
+        return $http.get('http://192.168.3.147:3000/detail/'+id).then(
+          function(res){
+            return res.data.data;
+        })
+      }
     }
   })
+//  登陆
 .factory('Login', function($http) {
     return{
       panduanLogin:function(id,pwd){
         return $http.post('http://192.168.3.147:3000/login',{id:id,password:pwd}).then(function(res){
             return res.data;
         })
-      }
-    }
-  })
-.factory('newuser', function($http) {
-    return{
-      Zhuce:function(id,name,pwd){
+      },
+      Zhuce:function(id,nama,pwd){
         return $http.post('http://192.168.3.147:3000/newuser',{id:id,name:name,password:pwd}).then(function(res){
           console.log(res.data);
           return res.data;
         })
-      }
-    }
-
-  })
-  .factory('alert', function($http) {
-    return{
+      },
       Alter:function(id,oldpwd,newpwd){
         return $http.put('http://192.168.3.147:3000/alert',{id:id,oldpwd:oldpwd,newpwd:newpwd}).then(function(res){
           return res.data;
         })
       }
     }
+  })
+//  代付款
+.factory('PaymentPay', function($http) {
+    return{
+      payment:function(id){
+        return $http.get('http://192.168.3.147:3000/Payment/'+ id).then(function(res){
+          return res.data.data;
+        })
+      },
+      paymentpay:function(ordernumber){
+        return $http.get('http://192.168.3.147:3000/PaymentPay/'+ ordernumber).then(function(res){
+          return res.data.data;
+        })
+      },
+      paycancel:function(ordernumber){
+        return $http.delete('http://192.168.3.147:3000/paycancel/'+ ordernumber).then(function(res){
+         return res.data;
+        })
+      },
+      pay:function(ordernumber){
+        return $http.put('http://192.168.3.147:3000/pay',{id:ordernumber}).then(function(res){
+          return res.data;
+        })
+      }
+    }
 
   })
+//  全部订单
+.factory('Order', function($http) {
+  return {
+    orders: function (id) {
+      return $http.get('http://192.168.3.147:3000/Order/' + id).then(function (res) {
+        return res.data.data;
+      })
+    },
+    deleteorders: function (id) {
+      console.log(id);
+      return $http.delete('http://192.168.3.147:3000/deleteorder/' + id).then(function (res) {
+        return res.data;
+      })
+    },
+    orderdetails:function(id){
+      // console.log(id);
+      return $http.get('http://192.168.3.147:3000/orderdetails/' + id).then(function (res) {
+        return res.data.data;
+      })
+    }
+  }
+
+})

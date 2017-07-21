@@ -3,6 +3,10 @@
     *{
       font-size: 12px;
     }
+    a{
+      color: #666;
+      text-decoration: none;
+    }
     /*1,头部导航*/
     header{
       position: fixed;
@@ -275,7 +279,7 @@
     <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x">
       <div style="width:1200px;">
         <ul class="tehui" style="width:1200px;">
-          <li ng-repeat="gd in good" ng-click="sale(id)">
+          <li ng-repeat="gd in good" ng-click="sale(gd)">
             <img ng-src="{{gd.src}}"><br>
             <p>{{gd.title}}</p>
             <p><span>￥{{gd.now_price}}</span><span style="color:rgba(0,0,0,0.5);"><del>￥{{gd.pre_price}}</del></span></p>
@@ -290,7 +294,7 @@
     <div>
       <p class="tehui_p">————鲜花精选————</p>
       <ul class="tehui xianhua">
-        <li ng-repeat="gd in xianhua" ng-click="sale(id)">
+        <li ng-repeat="gd in xianhua" ng-click="sale(gd)">
           <img ng-src="{{gd.src}}"><br>
           <p>{{gd.title}}</p>
           <p class="material" style="height: 16px;">{{gd.desc}}</p>
@@ -316,7 +320,7 @@
       <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
         <div style="width:1200px;">
           <ul class="tehui" style="width:1200px;">
-            <li ng-repeat="gd in ysh" ng-click="sale(id)">
+            <li ng-repeat="gd in ysh" ng-click="sale(gd)">
               <img ng-src="{{gd.src}}"><br>
               <p>{{gd.title}}</p>
               <p><span>￥{{gd.now_price}}</span></p>
@@ -338,7 +342,7 @@
       <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
         <div style="width:1400px;">
           <ul class="tehui" style="width:1400px;">
-            <li ng-repeat="gd in dg" ng-click="sale(id)">
+            <li ng-repeat="gd in dg" ng-click="sale(gd)">
               <img ng-src="{{gd.src}}"><br>
               <p>{{gd.title}}</p>
               <p><span>￥{{gd.now_price}}</span></p>

@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
+.factory('Chats', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -45,9 +45,238 @@ angular.module('starter.services', [])
         }
       }
       return null;
-    }
+    },
+    getalldata:function () {
+      return $http.get('http://192.168.3.147:3000/all').then(
+        function (res) {return res;}
+     )},
   };
 })
+  //  1,永生花
+.factory('Flowers',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      yongshenghuafenlei:function () {
+        return $http.get('http://192.168.3.147:3000/yongshenghuafenlei').then(
+          function (res) {return res;}
+        )},
+      yongshenghuajiage:function () {
+        return $http.get('http://192.168.3.147:3000/yongshenghuajiage').then(
+          function (res) {return res;}
+        )},
+      yongshenghuazonghe:function () {
+        return $http.get('http://192.168.3.147:3000/yongshenghuazonghe').then(
+          function (res) {return res;}
+        )},
+      yongshenghuaxiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/yongshenghuaxiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  //  2.鲜花
+.factory('Xianhua',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      xianhuafenlei:function () {
+        return $http.get('http://192.168.3.147:3000/xianhuafenlei').then(
+          function (res) {return res;}
+        )},
+      xianhuahuajiage:function () {
+        return $http.get('http://192.168.3.147:3000/xianhuajiage').then(
+          function (res) {return res;}
+        )},
+      xianhuazonghe:function () {
+        return $http.get('http://192.168.3.147:3000/xianhuazonghe').then(
+          function (res) {return res;}
+        )},
+      xianhuaxiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/xianhuaxiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  // ,3，品牌公仔
+.factory('Ppgz',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      pinpaigongzaifenlei:function () {
+        return $http.get('http://192.168.3.147:3000/pinpaigongzaifenlei').then(
+          function (res) {return res;}
+        )},
+      pinpaigongzaijiage:function () {
+        return $http.get('http://192.168.3.147:3000/pinpaigongzaijiage').then(
+          function (res) {return res;}
+        )},
+      pinpaigongzaizonghe:function () {
+        return $http.get('http://192.168.3.147:3000/pinpaigongzaizonghe').then(
+          function (res) {return res;}
+        )},
+      pinpaigongzaixiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/pinpaigongzaixiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  //4，蛋糕
+  .factory('Dangao',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      dangaofenlei:function () {
+        return $http.get('http://192.168.3.147:3000/dangaofenlei').then(
+          function (res) {return res;}
+        )},
+      dangaojiage:function () {
+        return $http.get('http://192.168.3.147:3000/dangaojiage').then(
+          function (res) {return res;}
+        )},
+      dangaozonghe:function () {
+        return $http.get('http://192.168.3.147:3000/dangaozonghe').then(
+          function (res) {return res;}
+        )},
+      dangaoxiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/dangaoxiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  //  5,商务鲜花
+  .factory('Shangwuxianhua',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      shangwuxianhuafenlei:function () {
+        return $http.get('http://192.168.3.147:3000/shangwuxianhuafenlei').then(
+          function (res) {return res;}
+        )},
+      shangwuxianhuajiage:function () {
+        return $http.get('http://192.168.3.147:3000/shangwuxianhuajiage').then(
+          function (res) {return res;}
+        )},
+      shangwuxianhuazonghe:function () {
+        return $http.get('http://192.168.3.147:3000/shangwuxianhuazonghe').then(
+          function (res) {return res;}
+        )},
+      shangwuxianhuaxiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/shangwuxianhuaxiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  //  6.礼篮
+  .factory('Lilan',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      lilanfenlei:function () {
+        return $http.get('http://192.168.3.147:3000/lilanfenlei').then(
+          function (res) {return res;}
+        )},
+      lilanjiage:function () {
+        return $http.get('http://192.168.3.147:3000/lilanjiage').then(
+          function (res) {return res;}
+        )},
+      lilanzonghe:function () {
+        return $http.get('http://192.168.3.147:3000/lilanzonghe').then(
+          function (res) {return res;}
+        )},
+      lilanxiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/lilanxiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  // 7，特色礼品
+  .factory('Teselipin',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+     teselipinfenlei:function () {
+        return $http.get('http://192.168.3.147:3000/teselipinfenlei').then(
+          function (res) {return res;}
+        )},
+      teselipinjiage:function () {
+        return $http.get('http://192.168.3.147:3000/teselipinjiage').then(
+          function (res) {return res;}
+        )},
+      teselipinzonghe:function () {
+        return $http.get('http://192.168.3.147:3000/teselipinzonghe').then(
+          function (res) {return res;}
+        )},
+      teselipinxiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/teselipinxiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  //8，巧克力
+  .factory('Qiaokeli',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      qiaokelifenlei:function () {
+        return $http.get('http://192.168.3.147:3000/qiaokelifenlei').then(
+          function (res) {return res;}
+        )},
+      qiaokelijiage:function () {
+        return $http.get('http://192.168.3.147:3000/qiaokelijiage').then(
+          function (res) {return res;}
+        )},
+      qiaokelizonghe:function () {
+        return $http.get('http://192.168.3.147:3000/qiaokelizonghe').then(
+          function (res) {return res;}
+        )},
+      qiaokelixiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/qiaokelixiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
+  //9，绿植花卉
+  .factory('Lvzhihuahui',function ($http) {
+    return {
+      getalldata:function () {
+        return $http.get('http://192.168.3.147:3000/all').then(
+          function (res) {return res;}
+        )},
+      lvzhihuahuifenlei:function () {
+        return $http.get('http://192.168.3.147:3000/lvzhihuahuifenlei').then(
+          function (res) {return res;}
+        )},
+      lvzhihuahuijiage:function () {
+        return $http.get('http://192.168.3.147:3000/lvzhihuahuijiage').then(
+          function (res) {return res;}
+        )},
+      lvzhihuahuizonghe:function () {
+        return $http.get('http://192.168.3.147:3000/lvzhihuahuizonghe').then(
+          function (res) {return res;}
+        )},
+      lvzhihuahuixiaoliang:function () {
+        return $http.get('http://192.168.3.147:3000/lvzhihuahuixiaoliang').then(
+          function (res) {return res;}
+        )},
+    };
+  })
 .factory('Dash', function($http) {
     return {
       bannerTop:function () {
@@ -100,7 +329,7 @@ angular.module('starter.services', [])
     }
   })
 //  代付款
-.factory('PaymentPay', function($http) {
+.factory('PaymentPay', function($http){
     return{
       payment:function(id){
         return $http.get('http://192.168.3.147:3000/Payment/'+ id).then(function(res){
@@ -114,7 +343,7 @@ angular.module('starter.services', [])
       },
       paycancel:function(ordernumber){
         return $http.delete('http://192.168.3.147:3000/paycancel/'+ ordernumber).then(function(res){
-         return res.data;
+          return res.data;
         })
       },
       pay:function(ordernumber){
@@ -123,7 +352,6 @@ angular.module('starter.services', [])
         })
       }
     }
-
   })
 //  全部订单
 .factory('Order', function($http) {
@@ -146,5 +374,4 @@ angular.module('starter.services', [])
       })
     }
   }
-
 })

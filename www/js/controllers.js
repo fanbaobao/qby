@@ -1,6 +1,9 @@
 angular.module('starter.controllers', [])
-
-.controller('DashCtrl', function($scope,Dash,$window) {
+.controller('DashCtrl', function($scope,Dash,$window,$rootScope) {
+  $scope.$on('$ionicView.enter', function () {
+    // 显示 tabs
+    $rootScope.hideTabs = false;
+  });
   $scope.bannerT=[];//头部轮播
   Dash.bannerTop().then(
     function (result) {
@@ -144,12 +147,9 @@ angular.module('starter.controllers', [])
 
 })
 //登录成功
-.controller('MineLoginCtrl', function($scope,$ionicHistory,Login,$window) {
+.controller('MineLoginCtrl', function($scope,Login,$window) {
   $scope.suc='true';
-  $scope.info = '登陆'
-  $scope.go = function(){
-    $ionicHistory.goBack();
-  }
+  $scope.info = '登陆';
   $scope.Login = function(user){
     $scope.info = '正在登陆...'
     console.log(user);
@@ -175,11 +175,8 @@ angular.module('starter.controllers', [])
   }
 })
 //注册用户
-.controller('MineSloginCtrl', function($scope,$ionicHistory,Login,$window) {
+.controller('MineSloginCtrl', function($scope,Login,$window) {
   $scope.info = '注册';
-  $scope.go = function(){
-    $ionicHistory.goBack();
-  }
   $scope.zhuce = function(user){
     $scope.info = '正在注册，请稍后..';
     Login.Zhuce(user.id,user,name,user.pwd)
@@ -196,10 +193,7 @@ angular.module('starter.controllers', [])
   }
 })
 //退出登录
-.controller('MineloginUserCtrl', function($scope,$ionicHistory,$window) {
-  $scope.go = function(){
-    $ionicHistory.goBack();
-  }
+.controller('MineloginUserCtrl', function($scope,$window) {
   $scope.exit = function(){
     localStorage.removeItem('name');
     localStorage.removeItem('id');
@@ -207,13 +201,10 @@ angular.module('starter.controllers', [])
   }
 })
 //修改密码
-.controller('MineloginUserAlterCtrl', function($scope,$ionicHistory,Login,$window) {
+.controller('MineloginUserAlterCtrl', function($scope,Login,$window) {
   $scope.notes_name = localStorage.getItem('name');
   $scope.notes_id = localStorage.getItem('id');
   $scope.suc = true;
-    $scope.go = function(){
-      $ionicHistory.goBack();
-    }
     $scope.pwdUpdate = function(user){
       Login.Alter($scope.notes_id,user.oldpwd,user.newpwd)
         .then(function(result){
@@ -226,10 +217,7 @@ angular.module('starter.controllers', [])
 
 })
 //代付款
-.controller('MinePaymentCtrl', function($scope,$ionicHistory,PaymentPay) {
-  $scope.go = function () {
-    $ionicHistory.goBack();
-  }
+.controller('MinePaymentCtrl', function($scope,PaymentPay) {
   PaymentPay.payment(localStorage.getItem('id')).then(function(result){
     console.log(result);
     if (result.length == 0){
@@ -241,10 +229,7 @@ angular.module('starter.controllers', [])
   })
 })
 //代付款订单详情
-.controller('MinePaymentDetailCtrl', function($scope,$ionicHistory,$stateParams,PaymentPay,$window) {
-  $scope.go = function () {
-    $ionicHistory.goBack();
-  }
+.controller('MinePaymentDetailCtrl', function($scope,$stateParams,PaymentPay,$window) {
   PaymentPay.paymentpay($stateParams.order_number).then(function(result){
       $scope.paymentList = result;
       console.log($scope.paymentList)
@@ -269,11 +254,8 @@ angular.module('starter.controllers', [])
   }
 })
 //全部订单
-.controller('MineallorderCtrl', function($scope,$ionicHistory,$stateParams,Order,$window) {
+.controller('MineallorderCtrl', function($scope,$stateParams,Order) {
     $scope.paymentList = [];
-    $scope.go = function () {
-      $ionicHistory.goBack();
-    }
     Order.orders(localStorage.getItem('id')).then(function(result){
       if (result.length == 0){
         $scope.suc=true;
@@ -293,10 +275,7 @@ angular.module('starter.controllers', [])
     }
 })
 //全部订单详情
-.controller('MineorderdetailsCtrl', function($scope,$ionicHistory,$stateParams,Order,$window) {
-    $scope.go = function () {
-      $ionicHistory.goBack();
-    }
+.controller('MineorderdetailsCtrl', function($scope,$stateParams,Order,$window) {
     Order.orderdetails($stateParams.order_number).then(function(result){
       $scope.paymentList = result;
     })
@@ -310,15 +289,44 @@ angular.module('starter.controllers', [])
     }
   })
 //商品详情
-.controller('dashDetailCtrl', function($scope,$ionicHistory,Dash,$stateParams,$window) {
-    $scope.go = function () {
-      $ionicHistory.goBack();
-    }
-    console.log($stateParams.dashId)
-    Dash.Dashdetail($stateParams.dashId).then(function(result){
-      $scope.detail = result;
-      console.log($scope.detail);
-    })
+.controller('dashDetailCtrl', function($scope,Dash,$stateParams,Comment,$window) {
+
+  console.log($stateParams.dashId)
+  // $scope.onDragUp=function(){
+  //  $window.location.href='#/tab/mine/login';
+  // }
+  //下划刷新
+  // $scope.onDragDown=function(){
+
+  // }
+  Dash.Dashdetail($stateParams.dashId).then(function(result){
+    $scope.detail = result;
+    console.log(result)
+  })
+  Dash.Dashdetaildesc($stateParams.dashId).then(function(result){
+    $scope.detaildesc = result[0];
+    console.log($scope.detaildesc);
+  })
+  Comment.all($stateParams.dashId).then(function(result){
+    $scope.comment = result;
+    $scope.length = result.length;
+    console.log(result);
+  })
+
+})
+.controller('dashDetailMoreCtrl', function($scope,Dash,$stateParams,$ionicHistory,Comment,$window) {
+  console.log($stateParams.moreId)
+  $scope.go=function () {
+    $ionicHistory.goBack();
+  }
+
+})
+//下订单
+.controller('dashDetailorderCtrl', function($scope,Dash,$stateParams,$ionicHistory,Comment,$window) {
+  console.log($stateParams.moreId)
+  $scope.go=function () {
+    $ionicHistory.goBack();
+  }
 
 })
 

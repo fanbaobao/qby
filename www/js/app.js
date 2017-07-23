@@ -6,7 +6,22 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
-
+  .directive('showTabs', function ($rootScope) {
+    return {
+      restrict: 'A',
+      link: function ($scope, $el) {
+        $rootScope.hideTabs = false;
+      }
+    };
+  })
+  .directive('hideTabs', function ($rootScope) {
+  return {
+    restrict: 'A',
+    link: function ($scope, $el) {
+      $rootScope.hideTabs = true;
+    }
+  };
+})
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
 
@@ -58,6 +73,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-dash': {
           templateUrl: 'templates/dash-detail.html',
           controller: 'dashDetailCtrl'
+        }
+      }
+    })
+    .state('tab.dash-detail-order', {
+      cache:false,
+      url: '/dash/detailorder/:gId',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/detail-order.html',
+          controller: 'dashDetailorderCtrl'
         }
       }
     })

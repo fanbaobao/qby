@@ -1,6 +1,9 @@
 angular.module('starter.controllers', [])
-
-.controller('DashCtrl', function($scope,Dash,$window,$ionicSlideBoxDelegate) {
+.controller('DashCtrl', function($scope,Dash,$window,$ionicSlideBoxDelegate,$rootScope) {
+  $scope.$on('$ionicView.enter', function () {
+    // 显示 tabs
+    $rootScope.hideTabs = false;
+  })
   $scope.bannerT=[];//头部轮播
   Dash.bannerTop().then(
     function (result) {
@@ -205,451 +208,15 @@ angular.module('starter.controllers', [])
     }
   );
 })
-  //1.1永生花分类列表
-.controller('FlowersCtrl', function($scope,Flowers,$ionicHistory) {
-$scope.activeShow=function ($event,pa) {
-      var a = [];
-      var order='+sell_num';
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-      if(order=='+'+pa){
-        order='-'+pa;
-      }else{
-        order='+'+pa;
-      }
-    };
-  $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-  Flowers.getalldata().then(
-      function (result) {
-      if(result.data.success){
-        $scope.alldata=result.data.data;
-      }
-    });
-  Flowers.yongshenghuafenlei().then(
-    function (result) {
-      if(result.data.success){
-        $scope.yongshenghuafenlei=result.data.data;
-      }
-    });
-  Flowers.yongshenghuajiage().then(
-    function (result) {
-      if(result.data.success){
-        $scope.yongshenghuajiage=result.data.data;
-      }
-    });
-  Flowers.yongshenghuazonghe().then(
-    function (result) {
-      if(result.data.success){
-        $scope.yongshenghuazonghe=result.data.data;
-      }
-    });
-  Flowers.yongshenghuaxiaoliang().then(
-    function (result) {
-      if(result.data.success){
-        $scope.yongshenghuaxiaoliang=result.data.data;
-        console.log($scope.alldata);
-      }
-    });
-  })
-//1.2鲜花分类列表
-.controller('XianhuaCtrl', function($scope,Xianhua,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-  Xianhua.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-  Xianhua.xianhuafenlei().then(
-    function (result) {
-      if(result.data.success){
-        $scope.xianhuafenlei=result.data.data;
-      }
-    });
-  Xianhua.xianhuahuajiage().then(
-    function (result) {
-      if(result.data.success){
-        $scope.xianhuahuajiage=result.data.data;
-      }
-    });
-  Xianhua.xianhuazonghe().then(
-    function (result) {
-      if(result.data.success){
-        $scope.xianhuazonghe=result.data.data;
-      }
-    });
-  Xianhua.xianhuaxiaoliang().then(
-    function (result) {
-      if(result.data.success){
-        $scope.xianhuaxiaoliang=result.data.data;
-        console.log($scope.xianhuaxiaoliang);
-      }
-    });
-  })
-//1.3品牌公仔
-  .controller('PpgzCtrl', function($scope,Ppgz,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Ppgz.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Ppgz.pinpaigongzaifenlei().then(
-      function (result) {
-        if(result.data.success){
-          $scope.pinpaigongzaifenlei=result.data.data;
-        }
-      });
-    Ppgz.pinpaigongzaijiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.pinpaigongzaijiage=result.data.data;
-        }
-      });
-    Ppgz.pinpaigongzaizonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.pinpaigongzaizonghe=result.data.data;
-        }
-      });
-    Ppgz.pinpaigongzaixiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.pinpaigongzaixiaoliang=result.data.data;
-        }
-      });
-  })
-  //  1.4蛋糕
-  .controller('DangaoCtrl', function($scope,Dangao,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Dangao.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Dangao.dangaofenlei().then(
-      function (result) {
-        if(result.data.success){
-          $scope.dangaofenlei=result.data.data;
-        }
-      });
-    Dangao.dangaojiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.dangaojiage=result.data.data;
-        }
-      });
-    Dangao.dangaozonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.dangaozonghe=result.data.data;
-        }
-      });
-    Dangao.dangaoxiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.dangaoxiaoliang=result.data.data;
-        }
-      });
-  })
-  //1.5商务鲜花
-  .controller('ShangwuxianhuaCtrl', function($scope,Shangwuxianhua,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Shangwuxianhua.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Shangwuxianhua.shangwuxianhuafenlei().then(
-      function (result) {
-        if(result.data.success) {
-          $scope.shangwuxianhuafenlei = result.data.data;
-        }
-      });
-    Shangwuxianhua.shangwuxianhuajiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.shangwuxianhuajiage=result.data.data;
-        }
-      });
-    Shangwuxianhua.shangwuxianhuazonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.shangwuxianhuazonghe=result.data.data;
-        }
-      });
-    Shangwuxianhua.shangwuxianhuaxiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.shangwuxianhuaxiaoliang=result.data.data;
-        }
-      });
-  })
-  //1.6礼篮
-  .controller('LilanCtrl', function($scope,Lilan,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Lilan.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Lilan.lilanfenlei().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lilanfenlei=result.data.data;
-        }
-      });
-    Lilan.lilanjiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lilanjiage=result.data.data;
-        }
-      });
-    Lilan.lilanzonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lilanzonghe=result.data.data;
-        }
-      });
-    Lilan.lilanxiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lilanxiaoliang=result.data.data;
-          console.log($scope.xianhuaxiaoliang);
-        }
-      });
-  })
-  //1.7特色礼品
-  .controller('TeselipinCtrl', function($scope,Teselipin,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Teselipin.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Teselipin.teselipinfenlei().then(
-      function (result) {
-        if(result.data.success){
-          $scope.teselipinfenlei=result.data.data;
-        }
-      });
-    Teselipin.teselipinjiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.teselipinjiage=result.data.data;
-        }
-      });
-    Teselipin.teselipinzonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.teselipinzonghe=result.data.data;
-        }
-      });
-    Teselipin.teselipinxiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.teselipinxiaoliang=result.data.data;
-        }
-      });
-  })
-  //1.8巧克力
-  .controller('QiaokeliCtrl', function($scope,Qiaokeli,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Qiaokeli.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Qiaokeli.qiaokelifenlei().then(
-      function (result) {
-        if(result.data.success){
-          $scope.qiaokelifenlei=result.data.data;
-        }
-      });
-    Qiaokeli.qiaokelijiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.qiaokelijiage=result.data.data;
-        }
-      });
-    Qiaokeli.qiaokelizonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.qiaokelizonghe=result.data.data;
-        }
-      });
-    Qiaokeli.qiaokelixiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.qiaokelixiaoliang=result.data.data;
-        }
-      });
-  })
-  //1.9绿植花卉
-  .controller('LvzhihuahuiCtrl', function($scope,Lvzhihuahui,$ionicHistory) {
-    $scope.activeShow=function ($event) {
-      var a = [];
-      var p = $event.target.parentNode.parentNode.children;
-      for(var i =0,pl= p.length;i<pl;i++) {
-        if(p[i] !== $event.target) a.push(p[i]);
-      }
-      for(var j=0,al=a.length;j<al;j++){
-        a[j].className='';
-      }
-      $event.target.parentNode.className='titleCur';
-    };
-    $scope.go=function () {
-      $ionicHistory.goBack();
-    }
-    Lvzhihuahui.getalldata().then(
-      function (result) {
-        if(result.data.success){
-          $scope.alldata=result.data.data;
-        }
-      });
-    Lvzhihuahui.lvzhihuahuifenlei().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lvzhihuahuifenlei=result.data.data;
-        }
-      });
-    Lvzhihuahui.lvzhihuahuijiage().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lvzhihuahuijiage=result.data.data;
-        }
-      });
-    Lvzhihuahui.lvzhihuahuizonghe().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lvzhihuahuizonghe=result.data.data;
-        }
-      });
-    Lvzhihuahui.lvzhihuahuixiaoliang().then(
-      function (result) {
-        if(result.data.success){
-          $scope.lvzhihuahuixiaoliang=result.data.data;
-        }
-      });
-  })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope,$ionicHistory) {
+.controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   }
-  $scope.show=function () {
-    return true;
-  }
-
 })
 //我的
 .controller('MineCtrl', function($scope,$window) {
@@ -664,12 +231,9 @@ $scope.activeShow=function ($event,pa) {
 
 })
 //登录成功
-.controller('MineLoginCtrl', function($scope,$ionicHistory,Login,$window) {
+.controller('MineLoginCtrl', function($scope,Login,$window) {
   $scope.suc='true';
-  $scope.info = '登陆'
-  $scope.go = function(){
-    $ionicHistory.goBack();
-  }
+  $scope.info = '登陆';
   $scope.Login = function(user){
     $scope.info = '正在登陆...'
     console.log(user);
@@ -695,11 +259,8 @@ $scope.activeShow=function ($event,pa) {
   }
 })
 //注册用户
-.controller('MineSloginCtrl', function($scope,$ionicHistory,Login,$window) {
+.controller('MineSloginCtrl', function($scope,Login,$window) {
   $scope.info = '注册';
-  $scope.go = function(){
-    $ionicHistory.goBack();
-  }
   $scope.zhuce = function(user){
     $scope.info = '正在注册，请稍后..';
     Login.Zhuce(user.id,user,name,user.pwd)
@@ -716,10 +277,7 @@ $scope.activeShow=function ($event,pa) {
   }
 })
 //退出登录
-.controller('MineloginUserCtrl', function($scope,$ionicHistory,$window) {
-  $scope.go = function(){
-    $ionicHistory.goBack();
-  }
+.controller('MineloginUserCtrl', function($scope,$window) {
   $scope.exit = function(){
     localStorage.removeItem('name');
     localStorage.removeItem('id');
@@ -727,13 +285,10 @@ $scope.activeShow=function ($event,pa) {
   }
 })
 //修改密码
-.controller('MineloginUserAlterCtrl', function($scope,$ionicHistory,Login,$window) {
+.controller('MineloginUserAlterCtrl', function($scope,Login,$window) {
   $scope.notes_name = localStorage.getItem('name');
   $scope.notes_id = localStorage.getItem('id');
   $scope.suc = true;
-    $scope.go = function(){
-      $ionicHistory.goBack();
-    }
     $scope.pwdUpdate = function(user){
       Login.Alter($scope.notes_id,user.oldpwd,user.newpwd)
         .then(function(result){
@@ -746,10 +301,7 @@ $scope.activeShow=function ($event,pa) {
 
 })
 //代付款
-.controller('MinePaymentCtrl', function($scope,$ionicHistory,PaymentPay) {
-  $scope.go = function () {
-    $ionicHistory.goBack();
-  }
+.controller('MinePaymentCtrl', function($scope,PaymentPay) {
   PaymentPay.payment(localStorage.getItem('id')).then(function(result){
     console.log(result);
     if (result.length == 0){
@@ -761,10 +313,7 @@ $scope.activeShow=function ($event,pa) {
   })
 })
 //代付款订单详情
-.controller('MinePaymentDetailCtrl', function($scope,$ionicHistory,$stateParams,PaymentPay,$window) {
-  $scope.go = function () {
-    $ionicHistory.goBack();
-  }
+.controller('MinePaymentDetailCtrl', function($scope,$stateParams,PaymentPay,$window) {
   PaymentPay.paymentpay($stateParams.order_number).then(function(result){
       $scope.paymentList = result;
       console.log($scope.paymentList)
@@ -789,11 +338,8 @@ $scope.activeShow=function ($event,pa) {
   }
 })
 //全部订单
-.controller('MineallorderCtrl', function($scope,$ionicHistory,$stateParams,Order,$window) {
+.controller('MineallorderCtrl', function($scope,$stateParams,Order) {
     $scope.paymentList = [];
-    $scope.go = function () {
-      $ionicHistory.goBack();
-    }
     Order.orders(localStorage.getItem('id')).then(function(result){
       if (result.length == 0){
         $scope.suc=true;
@@ -813,10 +359,7 @@ $scope.activeShow=function ($event,pa) {
     }
 })
 //全部订单详情
-.controller('MineorderdetailsCtrl', function($scope,$ionicHistory,$stateParams,Order,$window) {
-    $scope.go = function () {
-      $ionicHistory.goBack();
-    }
+.controller('MineorderdetailsCtrl', function($scope,$stateParams,Order,$window) {
     Order.orderdetails($stateParams.order_number).then(function(result){
       $scope.paymentList = result;
     })
@@ -830,15 +373,44 @@ $scope.activeShow=function ($event,pa) {
     }
   })
 //商品详情
-.controller('dashDetailCtrl', function($scope,$ionicHistory,Dash,$stateParams,$window) {
-    $scope.go = function () {
-      $ionicHistory.goBack();
-    }
-    console.log($stateParams.dashId)
-    Dash.Dashdetail($stateParams.dashId).then(function(result){
-      $scope.detail = result;
-      console.log($scope.detail);
-    })
+.controller('dashDetailCtrl', function($scope,Dash,$stateParams,Comment,$window) {
+
+  console.log($stateParams.dashId)
+  // $scope.onDragUp=function(){
+  //  $window.location.href='#/tab/mine/login';
+  // }
+  //下划刷新
+  // $scope.onDragDown=function(){
+
+  // }
+  Dash.Dashdetail($stateParams.dashId).then(function(result){
+    $scope.detail = result;
+    console.log(result)
+  })
+  Dash.Dashdetaildesc($stateParams.dashId).then(function(result){
+    $scope.detaildesc = result[0];
+    console.log($scope.detaildesc);
+  })
+  Comment.all($stateParams.dashId).then(function(result){
+    $scope.comment = result;
+    $scope.length = result.length;
+    console.log(result);
+  })
+
+})
+.controller('dashDetailMoreCtrl', function($scope,Dash,$stateParams,$ionicHistory,Comment,$window) {
+  console.log($stateParams.moreId)
+  $scope.go=function () {
+    $ionicHistory.goBack();
+  }
+
+})
+//下订单
+.controller('dashDetailorderCtrl', function($scope,Dash,$stateParams,$ionicHistory,Comment,$window) {
+  console.log($stateParams.moreId)
+  $scope.go=function () {
+    $ionicHistory.goBack();
+  }
 
 })
 

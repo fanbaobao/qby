@@ -304,7 +304,13 @@ angular.module('starter.services', [])
           function(res){
             return res.data.data;
         })
-      }
+      },
+      Dashdetaildesc:function(id){
+        return $http.get('http://192.168.3.147:3000/detaildesc/'+id).then(
+          function(res){
+            return res.data.data;
+          })
+      },
     }
   })
 //  登陆
@@ -374,6 +380,17 @@ angular.module('starter.services', [])
       })
     }
   }
+})
+//评价
+.factory('Comment', function($http) {
+  return {
+   all:function(id){
+     return $http.get('http://192.168.3.147:3000/allcomment/'+id).then(function(res){
+       return res.data.data;
+     })
+   }
+  }
+
 })
 // 购物车
   .factory('Car',function ($http) {

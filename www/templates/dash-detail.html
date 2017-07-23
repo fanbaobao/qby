@@ -1,4 +1,4 @@
-<ion-view view-title="商品详情">
+<ion-view view-title="商品详情" hide-tabs>
   <style>
     .scroll-content {
       background-color: rgb(240, 239, 237);
@@ -6,21 +6,287 @@
     }
     img{
       width: 100%;
+      display: block;
     }
     .bannerTlunbo .slider-pager .slider-pager-page {
       position: relative;
       bottom: 0px;
     }
+    .desc{
+      position: relative;
+      top:-10px;
+      width:100%;
+      height:70px;
+      padding:10px 20px 20px 20px;
+      background-color: #ffffff;
+    }
+    .desc span{
+      font-size:14px;
+    }
+    .desc .star{
+      float: right;
+      display: block;
+      width:24px;
+      height: 24px;
+      background:url("../img/detail/icon_collect.png") center center;
+      -webkit-background-size:100%;
+      background-size:100%;
+    }
+    .desc .now_price{
+      font-size:20px;
+      color: red;
+    }
+    .desc .pre_price{
+      font-size:12px;
+      color: #666;
+    }
+    .florid{
+      margin:0 0 10px 0;
+      background-color: #fff;
+      width:100%;
+      height:40px;
+      padding:12px;
+    }
+    .florid span{
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+      line-height:16px;
+      text-overflow: ellipsis;
+    }
+    .florid span.hy{
+      width:315px;
+      text-align: center;
+    }
+    .florid span.hy::before{
+      content: '“';
+      font-size: 20px;
+      color: #cccccc;
+    }
+    .florid span.hy::after{
+      content: "”";
+      font-size: 20px;
+      color: #cccccc;
+      position: absolute;
+      right: 30px;
+    }
+    .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
+      min-height: 0px;
+    }
+    .item-complex .item-content, .item-radio .item-content {
+      padding: 10px 49px 10px 16px;
+    }
+    .list:nth-child(1){
+      margin-bottom: 15px;
+    }
+    .item span {
+      font-size: 14px;
+      color: #666;
+    }
+    .item h2 {
+      font-size: 14px;
+      color: #666;
+    }
+    .footer_cart {
+      /*position: fixed;*/
+      /*bottom: 0px;*/
+      position: fixed;
+      bottom: 0px;
+      height: 49px;
+      width: 100%;
+      z-index: 9999;
+      max-width: 640px;
+      background-color: red;
+    }
+    a{
+      color: black;
+      text-decoration: none;
+    }
+    .cart_md {
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .cart_md ul {
+      width: 40%;
+      float: left;
+      position: relative;
+    }
+
+    .cart_md ul:before {
+      position: absolute;
+      content: '';
+      -webkit-transform: scaleY(.2);
+      transform: scaleY(.2);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      border-top: 1px solid #999;
+    }
+
+    .cart_md li {
+      width: 33.33%;
+      text-align: center;
+      font-size: 10px;
+      float: left;
+    }
+
+    .cart_md li a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cart_md li img {
+      width: 24px;
+      margin: 5px auto 0px;
+    }
+
+    .cart_md > a {
+      display: inline-block;
+      width: 30%;
+      height: 49px;
+      float: right;
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+      line-height: 49px;
+    }
+    .go_buy {
+      background: #f60;
+    }
+
+    .add_cart {
+      background: rgb(255,167,71);
+    }
+
+    .cart_md .sale_out {
+      width: 60%;
+      background: #ccc;
+      display: none;
+    }
+
+    .middle_line {
+      display: inline-block;
+      width: 1px;
+      height: 20px;
+      background-color: #999;
+      -webkit-transform: scale(0.5,1);
+      transform: scale(0.5,1);
+      float: right;
+      margin-top: 14px;
+    }
   </style>
-  <ion-content>
+  <ion-content on-drag-down="onDragDown()">
     <ion-slide-box ng-if="detail" active-slide="model.activeIndex"
                    does-continue="true" slide-interval="4000" auto-play="true"
                    show-pager="true" pager-click="toSlideIndex(index)"
                    on-tap="stopOrStart()">
       <ion-slide ng-repeat="list in detail">
         <img ng-src="{{list.src}}">
-        <div></div>
       </ion-slide>
     </ion-slide-box>
+    <div class="desc">
+        <p class="title">
+          <span>{{detaildesc.desc}}</span>
+          <span style="color: red;">{{detaildesc.class}}</span>
+          <span class="star"></span>
+        </p>
+      <p>
+        <span class="now_price">￥{{detaildesc.now_price}}</span>
+        <del class="pre_price">￥{{detaildesc.pre_price}}</del>
+      </p>
+    </div>
+    <div class="florid">
+      <span>花语&nbsp;&nbsp;<span style="color: #aaa;" class="hy">{{detaildesc.mean}}</span></span>
+    </div>
+    <div class="aside">
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right"
+                  type="item-text-wrap"
+                  href="">
+          <h2>配送：{{detaildesc.nationwide}}</h2>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+        <ion-item class="item-remove-animate item-avatar item-icon-right"
+                  type="item-text-wrap"
+                  href="">
+        <h2 style="color: red;">App下单再减5元</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="pingjia">
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right"
+                  type="item-text-wrap"
+                  href="">
+          <span>订单评价</span>
+          <span style="float:right;">{{length}}条评价</span>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+        <ion-item class="item-remove-animate item-avatar item-icon-right"
+                  ng-repeat="comments in comment"
+                  type="item-text-wrap"
+                  href="">
+          <img ng-src="{{comments.src}}" style="top:10px; max-width:60px;max-height: 60px;">
+          <span style="display:inline-block; padding-left: 90px;">
+                <h2>{{comments.u_id}}</h2>
+                <p>{{comments.content}}</p>
+                <p>{{comments.address}}</p>
+          </span>
+          <i style="float: right;">
+            <p>{{comments.start}}</p>
+            <p>{{comments.data}}</p>
+          </i>
+        </ion-item>
+        <ion-item class="item-remove-animate item-avatar item-icon-right"
+                  type="item-text-wrap"
+                  href="#/tab/dash/detail/{{detaildesc.id}}">
+          <span style="display:inline-block;width:100%; text-align: center">点击查看更多</span>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="xiangqing">
+      <ul>
+        <li ng-repeat="">
+          <img src="" alt="">
+        </li>
+      </ul>
+    </div>
+
+
+
   </ion-content>
+  <!--底部导航-->
+  <div class="footer_cart">
+    <div class="cart_md">
+      <ul>
+        <li>
+          <a href="https://www.sobot.com/chat/h5/index.html?sysNum=d22b0bfa87fd42258397365c95bc5e08&title_info=%E7%88%B1%E7%9A%84%E8%AF%BA%E8%A8%80&url_info=http://m.hua.com/product/9012161.html&abstract_info=%E7%BA%A2%E7%8E%AB%E7%91%B019%E6%9E%9D%EF%BC%8C%E7%99%BD%E8%89%B2%E8%85%8A%E6%A2%852%E6%9E%9D&label_info=198%E5%85%83&thumbnail_info=http://img01.hua.com/uploadpic/newpic/9012161.jpg_220x240.jpg">
+            <i class="middle_line"></i>
+            <img src="../img/detail//icon_custom_service.png">
+            <span>客服</span>
+          </a>
+        </li>
+        <li class="collect">
+          <a href="">
+            <i class="middle_line"></i>
+            <img src="../img/detail/icon_collect.png" alt="">
+            <span>收藏</span>
+          </a>
+        </li>
+        <li>
+          <a href="#/tab/account" id="userCart" style="position:relative">
+            <img src="http://img02.hua.com/m/icon/bottonmIcon_CartDefault.png" alt="">
+            <span>购物车</span>
+            <span id="cartCount" style="display:none;"></span>
+          </a>
+        </li>
+      </ul>
+      <a href="" class="go_buy">立即购买</a>
+      <a href="#/tab/account" class="add_cart" ng-click="addaccount()">加入购物车</a>
+    </div>
+  </div>
 </ion-view>

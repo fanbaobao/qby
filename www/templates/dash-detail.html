@@ -32,6 +32,15 @@
       -webkit-background-size:100%;
       background-size:100%;
     }
+    .desc .clickstar{
+      float: right;
+      display: block;
+      width:24px;
+      height: 24px;
+      background:url("../img/detail/icon_collect_pressed.png") center center;
+      -webkit-background-size:100%;
+      background-size:100%;
+    }
     .desc .now_price{
       font-size:20px;
       color: red;
@@ -191,7 +200,8 @@
         <p class="title">
           <span>{{detaildesc.desc}}</span>
           <span style="color: red;">{{detaildesc.class}}</span>
-          <span class="star"></span>
+          <span class="star" ng-show="isShow"></span>
+          <span class="clickstar" ng-show="!isShow"></span>
         </p>
       <p>
         <span class="now_price">￥{{detaildesc.now_price}}</span>

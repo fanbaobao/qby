@@ -1,11 +1,9 @@
 angular.module('starter.controllers', [])
-.controller('DashCtrl', function($scope,Dash,$window,$rootScope) {
+.controller('DashCtrl', function($scope,Dash,$window,$ionicSlideBoxDelegate,$rootScope) {
   $scope.$on('$ionicView.enter', function () {
     // 显示 tabs
     $rootScope.hideTabs = false;
-  });
-
-.controller('DashCtrl', function($scope,Dash,$window,$ionicSlideBoxDelegate) {
+  })
   $scope.bannerT=[];//头部轮播
   Dash.bannerTop().then(
     function (result) {

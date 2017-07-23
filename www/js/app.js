@@ -102,6 +102,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
     //1.4蛋糕
     .state('tab.chats-dangao', {
+      cache:false,
       url: '/chats/dangao',
       views: {
         'tab-chats': {
@@ -183,7 +184,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 //  我的
   .state('tab.mine', {
-    cache:false,
     url: '/mine',
     views: {
       'tab-mine': {

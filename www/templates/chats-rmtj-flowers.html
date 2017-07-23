@@ -1,9 +1,9 @@
-<ion-view view-title="Flowers">
+<ion-view view-title="Flowers" hide-nav-bar="true">
   <style>
     .scroll-content {
       background-color: rgb(240, 239, 237);
       /*background: lime;*/
-      padding: 0 5px;
+      padding: 0;
     }
     .bar.bar-positive{
       background-color: rgba(250,250,250,.9);
@@ -27,6 +27,7 @@
     form#lei{
       width: 100%;
       height: 60px;
+      margin-top:0;
     }
     form#lei label{
       display: inline-block;
@@ -133,7 +134,7 @@
     </ion-header-bar>
     <section>
       <form class="lei" id="lei">
-        <label ng-click="activeShow($event)" class="titleCur"><input type="radio" ng-model="fenlei" value="zh" style="display: none;">综合</label><label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="xl" style="display: none;">销量</label><label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="jg" style="display: none;">价格</label><label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="yshfl" style="display: none;">永生花分类</label>
+        <label ng-click="activeShow($event)" class="titleCur"><input type="radio" ng-model="fenlei" value="zh" style="display: none;">综合</label><label ng-click="activeShow($event)" ng-model="xiaoliang"><input type="radio" ng-model="fenlei" value="xl" style="display: none;">销量</label><label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="jg" style="display: none;">价格</label><label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="yshfl" style="display: none;">永生花分类</label>
       </form>
       <div class="list_desc">
         <div ng-switch="fenlei">
@@ -149,7 +150,7 @@
           </div>
           <div ng-switch-when="xl">
             <ul class="tehui xianhua">
-              <li ng-repeat="gd in yongshenghuaxiaoliang" ng-click="sale(id)">
+              <li ng-repeat="gd in yongshenghuaxiaoliang | orderBy:order" ng-click="sale(id)">
                 <img ng-src="{{gd.src}}"><br>
                 <p>{{gd.title}}</p>
                 <p class="material" style="height: 16px;">{{gd.desc}}</p>
@@ -177,7 +178,6 @@
               </li>
             </ul>
           </div>
-
       </div>
       </div>
     </section>

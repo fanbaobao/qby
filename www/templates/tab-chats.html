@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
-<ion-view view-title="聊天">
-=======
-<ion-view view-title="Chats">
+<ion-view view-title="分类">
   <style>
     /*头部搜索框*/
     *{
@@ -65,7 +62,7 @@
     }
     .list_desc{
       width: 100%;
-      margin-top: 42px;
+      /*margin-top: 42px;*/
       position: relative;
     }
     img{
@@ -76,7 +73,7 @@
       position: absolute;
       color:white;
       text-align: center;
-      top:66px;
+      top:76px;
     }
     .list_desc .inner{
       width: 220px;
@@ -93,7 +90,6 @@
       margin-left:15px;
     }
   </style>
->>>>>>> Stashed changes
   <ion-content>
     <!--1、头部搜索框-->
     <header>
@@ -118,7 +114,7 @@
         <div ng-switch="fenlei">
           <div ng-switch-default="rmtj">
             <div class="img">
-              <img src="http://img02.hua.com/m/remind/all_banner_juxie.jpg" alt="">
+              <img src="http://img02.hua.com/m/remind/all_banner_juxie.jpg" style="margin-top: 43px;">
               <p>星座好礼，献给你身边的巨蟹座</p>
             </div>
             <p style="margin-top: 16px;">大家都在找</p>
@@ -130,9 +126,40 @@
             </div>
           </div>
           <div ng-switch-when="xh">
-            <h1>鲜花</h1>
-            <p>2</p>
+            <div class="img">
+              <img src="http://img02.hua.com/m/remind/all_cla_ban_business flower.jpg?" style="margin-top: 43px;">
+              <p>浪漫告白卡罗拉红玫瑰11枝￥235</p>
+            </div>
+            <!--价格分类-->
+            <div style="clear: both"></div>
+            <p style="margin-top: 16px;">价格</p>
+            <div class="inner">
+              <div style="float: left" ng-click="tiao('全部鲜花')">
+                <img src="http://img02.hua.com/m/icon/more_btn.png" alt="" style="width: 56px;height: 56px;">
+                <p>全部鲜花</p>
+              </div>
+              <div class="line">
+                <span ng-click="tiaol200()"><200元</span><br>
+                <span ng-click="tiaou200()">>200元</span>
+              </div>
+            </div>
+            <div style="clear: both"></div>
+            <!--枝数分类-->
+            <p style="margin-top: 16px;">枝数</p>
+            <div class="inner">
+              <div style="float: left" ng-click="tiao('全部鲜花')">
+                <img src="http://img02.hua.com/m/icon/more_btn.png" alt="" style="width: 56px;height: 56px;">
+                <p>全部鲜花</p>
+              </div>
+              <div ng-repeat="v in rmtjlist" class="line" ng-click="tiao('{{v.name}}')">
+                <img style="width: 56px;height: 56px;" ng-src="{{v.src}}">
+                <p align="center">{{v.name}}</p>
+              </div>
+            </div>
           </div>
+
+
+          <!--永生花分类-->
           <div ng-switch-when="ysh">
             <h1>Cars</h1>
             <p>3</p>

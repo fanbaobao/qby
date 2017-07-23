@@ -375,3 +375,10 @@ angular.module('starter.services', [])
     }
   }
 })
+// 购物车
+  .factory('Car',function ($http) {
+    return {
+
+    }
+  })
+

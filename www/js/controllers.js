@@ -107,17 +107,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChatsCtrl', function($scope, Chats,$window) {
-  // $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   Chats.remove(chat);
-  // };
+
 //  点击搜索显示搜索出来的内容
-//   $scope.sosoValue='巨蟹座';
   $scope.searchRes=function () {
-    alert(1);
+
   };
   $scope.activeShow=function ($event) {
-    alert(2);
     var a = [];
     var p = $event.target.parentNode.parentNode.children;
     for(var i =0,pl= p.length;i<pl;i++) {
@@ -134,6 +129,7 @@ angular.module('starter.controllers', [])
         $window.location.href='http://localhost:8100/#/tab/chats/flowers';
         break;
       case '鲜花':
+      case '全部鲜花':
         $window.location.href='http://localhost:8100/#/tab/chats/xianhua';
         break;
       case '品牌公仔':
@@ -159,10 +155,19 @@ angular.module('starter.controllers', [])
         break;
     }
   }
+  //根据价格跳转页面
+  $scope.jiagetiao=function (now_price) {
+    if(now_price<200){
+      $window.location.href='http://localhost:8100/#/tab/chats/xianhua/jiageLow200';
+    }else{
+      $window.location.href='http://localhost:8100/#/tab/chats/xianhua/jiageH200';
+    }
+  }
   Chats.getalldata().then(
     function (result) {
       if(result.data.success){
         $scope.rmtjlist=[];
+        $scope.xianhualist=[];
         var n1=0,n2=0,n3=0,n4=0,n5=0,n6=0,n7=0,n8=0,n9=0,n10=0;
         $scope.alldata=result.data.data;
         for(var i=0;i<result.data.data.length;i++){
@@ -202,8 +207,9 @@ angular.module('starter.controllers', [])
 })
   //1.1永生花分类列表
 .controller('FlowersCtrl', function($scope,Flowers,$ionicHistory) {
-$scope.activeShow=function ($event) {
+$scope.activeShow=function ($event,pa) {
       var a = [];
+      var order='+sell_num';
       var p = $event.target.parentNode.parentNode.children;
       for(var i =0,pl= p.length;i<pl;i++) {
         if(p[i] !== $event.target) a.push(p[i]);
@@ -212,6 +218,11 @@ $scope.activeShow=function ($event) {
         a[j].className='';
       }
       $event.target.parentNode.className='titleCur';
+      if(order=='+'+pa){
+        order='-'+pa;
+      }else{
+        order='+'+pa;
+      }
     };
   $scope.go=function () {
       $ionicHistory.goBack();
@@ -232,14 +243,12 @@ $scope.activeShow=function ($event) {
     function (result) {
       if(result.data.success){
         $scope.yongshenghuajiage=result.data.data;
-        console.log($scope.alldata);
       }
     });
   Flowers.yongshenghuazonghe().then(
     function (result) {
       if(result.data.success){
         $scope.yongshenghuazonghe=result.data.data;
-        console.log($scope.alldata);
       }
     });
   Flowers.yongshenghuaxiaoliang().then(
@@ -633,10 +642,14 @@ $scope.activeShow=function ($event) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope,$ionicHistory) {
   $scope.settings = {
     enableFriends: true
   }
+  $scope.show=function () {
+    return true;
+  }
+
 })
 //我的
 .controller('MineCtrl', function($scope,$window) {

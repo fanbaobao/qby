@@ -1,9 +1,157 @@
-<ion-view view-title="Account">
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+<ion-view view-title="购物车">
+  <style>
+    .car{
+      position: relative;
+      text-align: center;
+    }
+    .car img{
+      width: 60%;
+      max-width: 512px;
+      margin:30px 0 10px 0;
+    }
+    .car a{
+      text-decoration: none;
+      color: #666;
+      position: absolute;
+      left: 38%;
+      top:106%;
+      color: #f60;
+      background: #fff;
+      padding:0 20px;
+      border-radius: 3px;
+      height: 32px;
+      line-height: 32px;
+      border:1px solid #f60;
+    }
+    /*购物车合计*/
+    .car-content .pay-tip{
+      background: #fffcf1;
+      font-size:13px;
+      border-radius:3px;
+      margin:12px auto;
+      width: 90%;
+      padding: 10px;
+      border:1px solid #ccc;
+    }
+    .car-content a{
+      text-decoration: none;
+      color: #666;
+    }
+    .car-content ul{
+      list-style:none outside none;
+      font-style: normal;
+    }
+    .car-content ul li{
+      border-bottom: 1px solid #dbdbdb;
+      padding:15px 0 15px 6px;
+      position: relative;
+      margin-bottom:15px;
+      background: orchid;
+    }
+    .car-content ul li .clear{
+      clear: both;
+    }
+    .car-content ul li .clear .p-img,.car-content ul li .clear .f1,.car-content ul li .clear .undash{
+      float: left;
+    }
+    .car-content ul li .clear .p-img img{
+      width: 48px;
+    }
+    .car-content ul li .clear .setAmount{
+      width:220px;
+      /*background: lime;*/
+      position: relative;
+    }
+    .car-content ul li .clear .setAmount a{
+      display: inline-block;
+      width: 36px;
+      height: 24px;
+      background: white;
+      border:1px solid #ccc;
+      position: absolute;
+      top:0;
+      line-height: 24px;
+      text-align: center;
+    }
+    .car-content ul li .clear .setAmount a.jian{
+      left:40px;
+    }
+    .car-content ul li .clear .setAmount a.jia{
+      left: 106px;
+    }
+    .car-content ul li .clear .setAmount input{
+      width: 40px;
+      height: 24px;
+      position: absolute;
+      top:0;
+      left:70px;
+      padding-left:12px;
+      outline: none;
+      border:0;
+    }
+    .car-content ul li .undash{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(http://img02.hua.com/m/ljt.png) no-repeat;
+      background-size: 15px;
+      background-position: center;
+    }
+  </style>
+  <ion-content style="background: #fff;">
+    <!--购物车空-->
+    <div class="car" ng-show="show()">
+      <img src="http://img02.hua.com/m/empty_cart2.png" alt="">
+      <p>这里什么都没有...</p>
+      <a href="#/tab/dash">去逛逛</a>
+    </div>
+    <!--购物车非空-->
+    <div class="car-content">
+      <!--购物列表内容-->
+      <ul>
+        <li>
+          <div class="clear">
+            <div class="p-img">
+              <a href="#">
+                <img ng-src="http://img01.hua.com/uploadpic/newpic/9012161.jpg_80x87.jpg" alt="">
+              </a>
+            </div>
+            <div class="f1">
+              <a href="#" style="color: black;">
+                <span>[鲜花]</span>
+                <span>爱的诺言</span>
+              </a>
+              <p class="p-price">
+                现价：<span style="color: #ff6600;">￥199</span>
+              </p>
+              <div class="setAmount">
+                <span>数量：</span>
+                <a href="javascript:;" class="jian">-</a><input type="text" placeholder="1"><a href="javascript:;" class="jia">+</a>
+              </div>
+            </div>
+            <a href="#" class="undash">
+              <span class="icon_ljt"></span>
+            </a>
+          </div>
+          <div style="clear: both;"></div>
+        </li>
+      </ul>
+
+      <div class="pay-tip">
+        <font color="#666">
+          <a href="#/tab/dash" class="link">〈继续挑选</a>
+        </font>
+        <font color="#666" style="float: right;">
+          合计：
+          <span style="color:#f60;">￥</span>
+        </font>
+      </div>
+    </div>
+
+    <!--<ion-list>-->
+    <!--<ion-toggle  ng-model="settings.enableFriends">-->
+    <!--Enable Friends-->
+    <!--</ion-toggle>-->
+    <!--</ion-list>-->
   </ion-content>
 </ion-view>

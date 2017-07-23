@@ -4,9 +4,12 @@ angular.module('starter.controllers', [])
     // 显示 tabs
     $rootScope.hideTabs = false;
   });
+
+.controller('DashCtrl', function($scope,Dash,$window,$ionicSlideBoxDelegate) {
   $scope.bannerT=[];//头部轮播
   Dash.bannerTop().then(
     function (result) {
+      $ionicSlideBoxDelegate.update();
       $scope.bannerT=[];
       if(result.data.success){
         for(var i=0;i<result.data.data.length;i++){
@@ -15,7 +18,6 @@ angular.module('starter.controllers', [])
           }
         }
       }
-      // console.log($scope.bannerT);
       return ($scope.bannerT);
     }
   );
@@ -87,11 +89,11 @@ angular.module('starter.controllers', [])
   ];
   //搜索框获取焦点时，处理跳转到分类页面
   $scope.goClass=function () {
-    $window.location.href='../templates/tab-chats.html';
+    $window.location.href='http://localhost:8100/#/tab/chats';
   }
   //点击登录时，处理跳转到登录页面
   $scope.goLogin=function () {
-
+    $window.location.href='http://localhost:8100/#/tab/mine/login';
   }
   //点击不同的分类时进入不同的类别
   $scope.goThisclass=function (page) {
@@ -109,20 +111,99 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  // console.log( $scope.chats);
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+.controller('ChatsCtrl', function($scope, Chats,$window) {
+  // $scope.chats = Chats.all();
+  // $scope.remove = function(chat) {
+  //   Chats.remove(chat);
+  // };
+//  点击搜索显示搜索出来的内容
+//   $scope.sosoValue='巨蟹座';
+  $scope.searchRes=function () {
+    alert(1);
   };
+  $scope.activeShow=function ($event) {
+    alert(2);
+    var a = [];
+    var p = $event.target.parentNode.parentNode.children;
+    for(var i =0,pl= p.length;i<pl;i++) {
+      if(p[i] !== $event.target) a.push(p[i]);
+    }
+    for(var j=0,al=a.length;j<al;j++){
+      a[j].className='';
+    }
+    $event.target.parentNode.className='titleCur';
+  };
+  $scope.tiao=function (name) {
+    switch (name){
+      case '永生花':
+        $window.location.href='http://localhost:8100/#/tab/chats/flowers';
+        break;
+      case '鲜花':
+        $window.location.href='http://localhost:8100/#/tab/chats/xianhua';
+        break;
+      case '品牌公仔':
+        $window.location.href='http://localhost:8100/#/tab/chats/pinpaigongzai';
+        break;
+      case '蛋糕':
+        $window.location.href='http://localhost:8100/#/tab/chats/dangao';
+        break;
+      case '商务鲜花':
+        $window.location.href='http://localhost:8100/#/tab/chats/shangwuxianhua';
+        break;
+      case '特色礼品':
+        $window.location.href='http://localhost:8100/#/tab/chats/teselipin';
+        break;
+      case '礼篮':
+        $window.location.href='http://localhost:8100/#/tab/chats/lilan';
+        break;
+      case '巧克力':
+        $window.location.href='http://localhost:8100/#/tab/chats/qiaokeli';
+        break;
+      case '绿植花卉':
+        $window.location.href='http://localhost:8100/#/tab/chats/lvzhihuahui';
+        break;
+    }
+  }
+  Chats.getalldata().then(
+    function (result) {
+      if(result.data.success){
+        $scope.rmtjlist=[];
+        var n1=0,n2=0,n3=0,n4=0,n5=0,n6=0,n7=0,n8=0,n9=0,n10=0;
+        $scope.alldata=result.data.data;
+        for(var i=0;i<result.data.data.length;i++){
+          if(result.data.data[i].name=='鲜花'){
+            n1++;
+            if(n1==1){ $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='商务鲜花'){
+            n2++;
+            if(n2==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='永生花'){
+            n3++;
+            if(n3==1){ $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='蛋糕'){
+            n4++;
+            if(n4==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='巧克力'){
+            n5++;
+            if(n5==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='特色礼品'){
+            n6++;
+            if(n6==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='品牌公仔'){
+            n7++;
+            if(n7==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='礼篮'){
+            n8++;
+            if(n8==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }else if(result.data.data[i].name=='绿植花卉'){
+            n9++;
+            if(n9==1){  $scope.rmtjlist.push(result.data.data[i]);}
+          }
+        }
+      }
+      console.log($scope.alldata);
+    }
+  );
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {

@@ -24,6 +24,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -85,6 +86,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+  // 1.1永生花
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -94,6 +96,97 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    .state('tab.chats-flowers', {
+      url: '/chats/flowers',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-flowers.html',
+          controller: 'FlowersCtrl'
+        }
+      }
+    })
+    // 1.2鲜花
+    .state('tab.chats-xianhua', {
+      url: '/chats/xianhua',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-xianhua.html',
+          controller: 'XianhuaCtrl'
+        }
+      }
+    })
+    //1.3品牌公仔
+    .state('tab.chats-pinpaigongzai', {
+      url: '/chats/pinpaigongzai',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-pinpaigongzai.html',
+          controller: 'PpgzCtrl'
+        }
+      }
+    })
+    //1.4蛋糕
+    .state('tab.chats-dangao', {
+      url: '/chats/dangao',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-dangao.html',
+          controller: 'DangaoCtrl'
+        }
+      }
+    })
+    //1.5商务鲜花
+    .state('tab.chats-shangwuxianhua', {
+      url: '/chats/shangwuxianhua',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-shangwuxianhua.html',
+          controller: 'ShangwuxianhuaCtrl'
+        }
+      }
+    })
+    //1.6礼篮
+    .state('tab.chats-lilan', {
+      url: '/chats/lilan',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-lilan.html',
+          controller: 'LilanCtrl'
+        }
+      }
+    })
+    //1.7特色礼品
+    .state('tab.chats-teselipin', {
+      url: '/chats/teselipin',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-teselipin.html',
+          controller: 'TeselipinCtrl'
+        }
+      }
+    })
+    //1.8巧克力
+    .state('tab.chats-qiaokeli', {
+      url: '/chats/qiaokeli',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-qiaokeli.html',
+          controller: 'QiaokeliCtrl'
+        }
+      }
+    })
+    //1.9绿植花卉
+    .state('tab.chats-lvzhihuahui', {
+      url: '/chats/lvzhihuahui',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chats-rmtj-lvzhihuahui.html',
+          controller: 'LvzhihuahuiCtrl'
+        }
+      }
+    })
+
+
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {

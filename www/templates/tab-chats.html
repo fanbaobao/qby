@@ -1,19 +1,187 @@
+<<<<<<< Updated upstream
 <ion-view view-title="聊天">
+=======
+<ion-view view-title="Chats">
+  <style>
+    /*头部搜索框*/
+    *{
+      font-size:12px;
+    }
+    header{
+      width: 100%;
+      height: 44px;
+      background: #eee;
+      position: fixed;
+    }
+    header .soso{
+      width:92%;
+      height: 26px;
+      position: fixed;
+      top:10px;
+      left:50%;
+      transform: translateX(-50%);
+      padding-left: 6px;
+    }
+    header .text_soso{
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background: lightblue;
+      position: fixed;
+      top:16px;
+      left:88%;
+      background: url(../img/dash/search.png) no-repeat;
+      background-size: 14px 14px;
+    }
+    /*2、内容显示*/
+    /*2.1左边显示列表*/
+    section{
+      height: 100%;
+    }
+    section form.lei{
+      width: 82px;
+      height: 100%;
+      background: #eee;
+      float: left;
+      margin-top:40px;
+    }
+    section form.lei label{
+      display: block;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      color: rgba(0,0,0,0.7);
+    }
+    form.lei label.titleCur{
+      color:orange;
+      background: white;
+    }
+    section div.list_desc{
+      float: left;
+      width: calc(100% - 98px);
+      margin-left: 8px;
+      height: 100%;
+      /*background: paleturquoise;*/
+    }
+    .list_desc{
+      width: 100%;
+      margin-top: 42px;
+      position: relative;
+    }
+    img{
+      width: 100%;
+    }
+    .list_desc .img p{
+      width: 100%;
+      position: absolute;
+      color:white;
+      text-align: center;
+      top:66px;
+    }
+    .list_desc .inner{
+      width: 220px;
+      margin:0 auto;
+      height: 100%;
+    }
+    .list_desc .inner>div{
+      float: left;
+    }
+    .list_desc .inner>div:not(:last-child){
+      margin-right:10px;
+    }
+    .list_desc .inner>div:nth-child(3n+1){
+      margin-left:15px;
+    }
+  </style>
+>>>>>>> Stashed changes
   <ion-content>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right"
-                ng-repeat="chat in chats"
-                type="item-text-wrap"
-                href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+    <!--1、头部搜索框-->
+    <header>
+      <input type="text" placeholder="狮子座" class="soso" ng-model="keywords">
+      <span class="text_soso" ng-click="searchRes()"></span>
+    </header>
+    <!--2、内容显示-->
+    <section>
+      <!--2.1左边显示列表-->
+      <form class="lei">
+        <label ng-click="activeShow($event)" class="titleCur"><input type="radio" ng-model="fenlei" value="rmtj" style="display: none;">热门推荐</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="xh" style="display: none;">鲜花</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="ysh" style="display: none;">永生花</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="dg" style="display: none;">蛋糕</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="qkl" style="display: none;">巧克力</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="tslp" style="display: none;">特色礼品</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="ppgz" style="display: none;">品牌公仔</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="ll" style="display: none;">礼篮</label>
+        <label ng-click="activeShow($event)"><input type="radio" ng-model="fenlei" value="lzhh" style="display: none;">绿植花卉</label>
+      </form>
+      <div class="list_desc">
+        <div ng-switch="fenlei">
+          <div ng-switch-default="rmtj">
+            <div class="img">
+              <img src="http://img02.hua.com/m/remind/all_banner_juxie.jpg" alt="">
+              <p>星座好礼，献给你身边的巨蟹座</p>
+            </div>
+            <p style="margin-top: 16px;">大家都在找</p>
+            <div class="inner">
+              <div ng-repeat="v in rmtjlist" class="line" ng-click="tiao('{{v.name}}')">
+                <img style="width: 56px;height: 56px;" ng-src="{{v.src}}">
+                <p align="center">{{v.name}}</p>
+              </div>
+            </div>
+          </div>
+          <div ng-switch-when="xh">
+            <h1>鲜花</h1>
+            <p>2</p>
+          </div>
+          <div ng-switch-when="ysh">
+            <h1>Cars</h1>
+            <p>3</p>
+          </div>
+          <div ng-switch-when="dg">
+            <h1>Cars</h1>
+            <p>4</p>
+          </div>
+          <div ng-switch-when="qkl">
+            <h1>Cars</h1>
+            <p>5</p>
+          </div>
+          <div ng-switch-when="tslp">
+            <h1>Cars</h1>
+            <p>6</p>
+          </div>
+          <div ng-switch-when="ppgz">
+            <h1>Cars</h1>
+            <p>7</p>
+          </div>
+          <div ng-switch-when="ll">
+            <h1>Cars</h1>
+            <p>8</p>
+          </div>
+          <div ng-switch-when="lzhh">
+            <h1>Cars</h1>
+            <p>9</p>
+          </div>
+        </div>
+      </div>
 
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
-      </ion-item>
-    </ion-list>
+    </section>
+
+
+
+    <!--<ion-list>-->
+      <!--<ion-item class="item-remove-animate item-avatar item-icon-right"-->
+                <!--ng-repeat="chat in chats"-->
+                <!--type="item-text-wrap"-->
+                <!--href="#/tab/chats/{{chat.id}}">-->
+        <!--<img ng-src="{{chat.face}}">-->
+        <!--<h2>{{chat.name}}</h2>-->
+        <!--<p>{{chat.lastText}}</p>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+
+        <!--<ion-option-button class="button-assertive" ng-click="remove(chat)">-->
+          <!--Delete-->
+        <!--</ion-option-button>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
   </ion-content>
 </ion-view>

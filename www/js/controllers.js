@@ -214,7 +214,11 @@ angular.module('starter.controllers', [])
   }
 })
 //我的
-.controller('MineCtrl', function($scope,$window) {
+.controller('MineCtrl', function($scope,$window,$rootScope) {
+  $scope.$on('$ionicView.enter', function () {
+    // 显示 tabs
+    $rootScope.hideTabs = false;
+  })
   $scope.notes_name = localStorage.getItem('name');
  $scope.Href = function(href){
    if($scope.notes_name){

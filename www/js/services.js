@@ -4,32 +4,32 @@ angular.module('starter.services', [])
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+  // var chats = [{
+  //   id: 0,
+  //   name: 'Ben Sparrow',
+  //   lastText: 'You on your way?',
+  //   face: 'img/ben.png'
+  // }, {
+  //   id: 1,
+  //   name: 'Max Lynx',
+  //   lastText: 'Hey, it\'s me',
+  //   face: 'img/max.png'
+  // }, {
+  //   id: 2,
+  //   name: 'Adam Bradleyson',
+  //   lastText: 'I should buy a boat',
+  //   face: 'img/adam.jpg'
+  // }, {
+  //   id: 3,
+  //   name: 'Perry Governor',
+  //   lastText: 'Look at my mukluks!',
+  //   face: 'img/perry.png'
+  // }, {
+  //   id: 4,
+  //   name: 'Mike Harrington',
+  //   lastText: 'This is wicked good ice cream.',
+  //   face: 'img/mike.png'
+  // }];
 
   return {
     all: function() {
@@ -433,32 +433,34 @@ angular.module('starter.services', [])
 // 购物车
   .factory('Car',function ($http) {
     return {
-      addcar:function(xinxi){
-        return $http.post('http://192.168.3.147:3000/addcar',xinxi).then(function(res){
+      addcar: function (xinxi) {
+        return $http.post('http://192.168.3.147:3000/addcar', xinxi).then(function (res) {
           return res.data;
         })
       },
-      getdata:function (id) {
-          console.log(id);
-          return $http.get('http://localhost:3000/allcar/'+id).then(function (res) {
-            return res.data.data;
-          })
-        },
-      removedata:function (id,u_id) {
-        console.log(id,u_id);
-        return $http.delete('http://localhost:3000/deletecar?g_id='+id+'&u_id='+u_id).then(
+      getdata: function (id) {
+        console.log(id);
+        return $http.get('http://localhost:3000/allcar/' + id).then(function (res) {
+          return res.data.data;
+        })
+      },
+      removedata: function (id, u_id) {
+        console.log(id, u_id);
+        return $http.delete('http://localhost:3000/deletecar?g_id=' + id + '&u_id=' + u_id).then(
           function (res) {
             console.log(res);
             return res.data.data;
           }
         )
       },
-      updatedata:function (g_id,num,u_id) {
-          // console.log(g_id,u_id,num);
-        return $http.put('http://localhost:3000/updatecar?g_id='+g_id+'&number='+num+'&u_id='+u_id).then(function (res) {
+      updatedata: function (g_id, num, u_id) {
+        // console.log(g_id,u_id,num);
+        return $http.put('http://localhost:3000/updatecar?g_id=' + g_id + '&number=' + num + '&u_id=' + u_id).then(function (res) {
           return res.data.data;
         })
       }
+    }
+  })
 //  收藏夹
 .factory('Collect',function ($http) {
   return {

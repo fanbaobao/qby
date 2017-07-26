@@ -4,32 +4,32 @@ angular.module('starter.services', [])
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  // var chats = [{
-  //   id: 0,
-  //   name: 'Ben Sparrow',
-  //   lastText: 'You on your way?',
-  //   face: 'img/ben.png'
-  // }, {
-  //   id: 1,
-  //   name: 'Max Lynx',
-  //   lastText: 'Hey, it\'s me',
-  //   face: 'img/max.png'
-  // }, {
-  //   id: 2,
-  //   name: 'Adam Bradleyson',
-  //   lastText: 'I should buy a boat',
-  //   face: 'img/adam.jpg'
-  // }, {
-  //   id: 3,
-  //   name: 'Perry Governor',
-  //   lastText: 'Look at my mukluks!',
-  //   face: 'img/perry.png'
-  // }, {
-  //   id: 4,
-  //   name: 'Mike Harrington',
-  //   lastText: 'This is wicked good ice cream.',
-  //   face: 'img/mike.png'
-  // }];
+  var chats = [{
+    id: 0,
+    name: 'Ben Sparrow',
+    lastText: 'You on your way?',
+    face: 'img/ben.png'
+  }, {
+    id: 1,
+    name: 'Max Lynx',
+    lastText: 'Hey, it\'s me',
+    face: 'img/max.png'
+  }, {
+    id: 2,
+    name: 'Adam Bradleyson',
+    lastText: 'I should buy a boat',
+    face: 'img/adam.jpg'
+  }, {
+    id: 3,
+    name: 'Perry Governor',
+    lastText: 'Look at my mukluks!',
+    face: 'img/perry.png'
+  }, {
+    id: 4,
+    name: 'Mike Harrington',
+    lastText: 'This is wicked good ice cream.',
+    face: 'img/mike.png'
+  }];
 
   return {
     all: function() {
@@ -308,6 +308,13 @@ angular.module('starter.services', [])
       Dashdetaildesc:function(id){
         return $http.get('http://192.168.3.147:3000/detaildesc/'+id).then(
           function(res){
+            // console.log(res);
+            return res.data.data;
+          })
+      },
+      MoreDetail:function(id){
+        return $http.get('http://192.168.3.147:3000/moredetail/'+id).then(
+          function(res){
             return res.data.data;
           })
       },
@@ -329,14 +336,20 @@ angular.module('starter.services', [])
             return res.data;
         })
       },
-      Zhuce:function(id,nama,pwd){
-        return $http.post('http://192.168.3.147:3000/newuser',{id:id,name:name,password:pwd}).then(function(res){
+      Zhuce:function(user){
+        console.log(user)
+        return $http.post('http://192.168.3.147:3000/newuser',user).then(function(res){
           console.log(res.data);
           return res.data;
         })
       },
       Alter:function(id,oldpwd,newpwd){
         return $http.put('http://192.168.3.147:3000/alert',{id:id,oldpwd:oldpwd,newpwd:newpwd}).then(function(res){
+          return res.data;
+        })
+      },
+      forget:function (user) {
+        return $http.put('http://192.168.3.147:3000/forget',user).then(function(res){
           return res.data;
         })
       }
@@ -364,6 +377,11 @@ angular.module('starter.services', [])
         return $http.put('http://192.168.3.147:3000/pay',{id:ordernumber}).then(function(res){
           return res.data;
         })
+      },
+      addpay:function(order){
+        return $http.post('http://192.168.3.147:3000/addpay',order).then(function(res){
+          return res.data;
+        })
       }
     }
   })
@@ -389,20 +407,37 @@ angular.module('starter.services', [])
     }
   }
 })
-//评价
+//  评价
 .factory('Comment', function($http) {
   return {
    all:function(id){
      return $http.get('http://192.168.3.147:3000/allcomment/'+id).then(function(res){
        return res.data.data;
      })
-   }
+   },
+    pingjia:function(xinxi){
+     console.log(xinxi);
+     return $http.post('http://192.168.3.147:3000/pinglun',xinxi).then(function(res){
+       return res.data;
+     })
+    },
+    updataispj:function(id,ispj){
+      console.log(id,ispj)
+      return $http.put('http://192.168.3.147:3000/updataispj',{id:id,ispj:ispj}).then(function (res) {
+        return res.data;
+      })
+    }
   }
 
 })
 // 购物车
   .factory('Car',function ($http) {
     return {
+      addcar:function(xinxi){
+        return $http.post('http://192.168.3.147:3000/addcar',xinxi).then(function(res){
+          return res.data;
+        })
+      },
       getdata:function (id) {
           console.log(id);
           return $http.get('http://localhost:3000/allcar/'+id).then(function (res) {
@@ -424,6 +459,30 @@ angular.module('starter.services', [])
           return res.data.data;
         })
       }
+//  收藏夹
+.factory('Collect',function ($http) {
+  return {
+    addcollect:function(xinxi){
+      console.log(xinxi)
+        return $http.post('http://192.168.3.147:3000/addcollect',xinxi).then(function(res){
+          return res.data;
+        })
+      },
+    removecollect:function(xinxi){
+      return $http.delete('http://192.168.3.147:3000/removecollect?u_id='+xinxi.u_id+'&g_id='+xinxi.g_id).then(function(res){
+        return res.data;
+      })
+    },
+    allcollect:function(xinxi){
+      return $http.get('http://192.168.3.147:3000/allcollect?g_id='+xinxi.g_id +'&u_id='+xinxi.u_id).then(function(res){
+        return res.data;
+      })
+    },
+    collect:function(user){
+      return $http.get('http://192.168.3.147:3000/collect/'+ user).then(function(res){
+        return res.data;
+      })
     }
-  })
+  }
+})
 

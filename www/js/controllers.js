@@ -239,11 +239,13 @@ angular.module('starter.controllers', [])
     }
     //判断是符登录
     Collect.allcollect($scope.collectxinxi).then(function(result){
+      console.log(result);
       $scope.isShow = result.success;
     })
+    console.log('qqqqqqqqqqq'+$scope.isShow)
     //判断购物车长度
     Car.getdata($scope.id).then(function(result){
-      console.log(result)
+      // console.log(result)
       $scope.carnum = result.length;
     })
     $scope.addsc= function(){
@@ -260,15 +262,15 @@ angular.module('starter.controllers', [])
       Collect.removecollect($scope.collectxinxi)
     }
     Dash.Dashdetail($stateParams.dashId).then(function(result){
-      console.log(result);
+      // console.log(result);
       for (var i = 0;i<result.length;i++){
         if (i<4){
           $scope.detail.push(result[i]);
         }
         $scope.moredetail.push(result[i]);
       }
-      console.log($scope.detail)
-      console.log($scope.moredetail)
+      // console.log($scope.detail)
+      // console.log($scope.moredetail)
     })
     Dash.Dashdetaildesc($stateParams.dashId).then(function(result){
       $scope.detaildesc = result[0];

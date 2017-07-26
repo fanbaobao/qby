@@ -308,7 +308,7 @@ angular.module('starter.services', [])
       Dashdetaildesc:function(id){
         return $http.get('http://192.168.3.147:3000/detaildesc/'+id).then(
           function(res){
-            console.log(res);
+            // console.log(res);
             return res.data.data;
           })
       },
@@ -453,7 +453,7 @@ angular.module('starter.services', [])
       })
     },
     allcollect:function(xinxi){
-      return $http.get('http://192.168.3.147:3000/allcollect?u_id='+xinxi.u_id+'&g_id='+xinxi.g_id).then(function(res){
+      return $http.get('http://192.168.3.147:3000/allcollect?g_id='+xinxi.g_id +'&u_id='+xinxi.u_id).then(function(res){
         return res.data;
       })
     },

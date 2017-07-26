@@ -4,32 +4,32 @@ angular.module('starter.services', [])
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+  // var chats = [{
+  //   id: 0,
+  //   name: 'Ben Sparrow',
+  //   lastText: 'You on your way?',
+  //   face: 'img/ben.png'
+  // }, {
+  //   id: 1,
+  //   name: 'Max Lynx',
+  //   lastText: 'Hey, it\'s me',
+  //   face: 'img/max.png'
+  // }, {
+  //   id: 2,
+  //   name: 'Adam Bradleyson',
+  //   lastText: 'I should buy a boat',
+  //   face: 'img/adam.jpg'
+  // }, {
+  //   id: 3,
+  //   name: 'Perry Governor',
+  //   lastText: 'Look at my mukluks!',
+  //   face: 'img/perry.png'
+  // }, {
+  //   id: 4,
+  //   name: 'Mike Harrington',
+  //   lastText: 'This is wicked good ice cream.',
+  //   face: 'img/mike.png'
+  // }];
 
   return {
     all: function() {
@@ -47,7 +47,7 @@ angular.module('starter.services', [])
       return null;
     },
     getalldata:function () {
-      return $http.get('http://192.168.3.147:3000/all').then(
+      return $http.get('http://localhost:3000/all').then(
         function (res) {return res;}
      )},
   };
@@ -280,27 +280,27 @@ angular.module('starter.services', [])
 .factory('Dash', function($http) {
     return {
       bannerTop:function () {
-        return $http.get('http://192.168.3.147:3000/banner').then(
+        return $http.get('http://localhost:3000/banner').then(
           function (res) {return res;}
         )},
       tehui:function () {
-        return $http.get('http://192.168.3.147:3000/goods').then(
+        return $http.get('http://localhost:3000/goods').then(
           function (res) {return res;}
         )},
       jingxuan:function () {
-        return $http.get('http://192.168.3.147:3000/xhjx').then(
+        return $http.get('http://localhost:3000/xhjx').then(
           function (res) { return res;}
         )},
       bannerBot:function () {
-        return $http.get('http://192.168.3.147:3000/banner').then(
+        return $http.get('http://localhost:3000/banner').then(
           function (res) {return res;}
         )},
       jingxuanlist:function () {
-        return $http.get('http://192.168.3.147:3000/jingxuan').then(
+        return $http.get('http://localhost:3000/jingxuan').then(
           function (res) {return res;}
         )},
       Dashdetail:function(id){
-        return $http.get('http://192.168.3.147:3000/detail/'+id).then(
+        return $http.get('http://localhost:3000/detail/'+id).then(
           function(res){
             return res.data.data;
         })
@@ -311,6 +311,14 @@ angular.module('starter.services', [])
             return res.data.data;
           })
       },
+      getallcomment:function (n) {
+        console.log(n);
+        return $http.get('http://localhost:3000/getallcomment/'+n).then(
+          function (res) {
+            return res.data.data;
+          }
+        )
+      }
     }
   })
 //  登陆
@@ -395,7 +403,27 @@ angular.module('starter.services', [])
 // 购物车
   .factory('Car',function ($http) {
     return {
-
+      getdata:function (id) {
+          console.log(id);
+          return $http.get('http://localhost:3000/allcar/'+id).then(function (res) {
+            return res.data.data;
+          })
+        },
+      removedata:function (id,u_id) {
+        console.log(id,u_id);
+        return $http.delete('http://localhost:3000/deletecar?g_id='+id+'&u_id='+u_id).then(
+          function (res) {
+            console.log(res);
+            return res.data.data;
+          }
+        )
+      },
+      updatedata:function (g_id,num,u_id) {
+          // console.log(g_id,u_id,num);
+        return $http.put('http://localhost:3000/updatecar?g_id='+g_id+'&number='+num+'&u_id='+u_id).then(function (res) {
+          return res.data.data;
+        })
+      }
     }
   })
 

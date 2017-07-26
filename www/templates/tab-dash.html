@@ -8,9 +8,7 @@
       text-decoration: none;
     }
     .scroll-content {
-      background-color: rgb(240, 239, 237);
-      /*background: lime;*/
-      padding: 0 5px;
+      background: white;
     }
     /*1,头部导航*/
     header{
@@ -62,7 +60,7 @@
       left:8px;
     }
     header .btn{
-      margin-left:6px;
+      margin-left:-2px;
       width: 40px;
       height:46px;
       line-height:42px;
@@ -78,6 +76,19 @@
       text-align: center;
       text-decoration: none;
       color: rgba(0,0,0,0.7);
+    }
+    .notic_icon{
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url(http://img02.hua.com/m/icon/my_icon_new.png?aa) no-repeat center;
+      background-size: 16px 16px;
+      margin-top: 2px;
+    }
+    .overflow-scroll .scroll {
+      position: static;
+      height: 100%;
+     -webkit-transform: none;
     }
     /*2，头部banner轮播*/
     img{
@@ -95,7 +106,7 @@
     }
     ul.culture li{
       float: left;
-      margin-right:26px;
+      margin-right:3%;
       font-size:12px;
       color:rgba(0,0,0,0.6);
     }
@@ -103,10 +114,11 @@
       margin-right: 0;
     }
     ul.culture li:first-child{
-      margin-left:20px;
+      margin-left: 8%;
     }
     ul.culture li>a{
       color:rgba(0,0,0,0.8);
+      text-decoration: underline;
     }
     /*3、、图片分类导航*/
     ul.clist{
@@ -238,6 +250,29 @@
       text-align: center;
       color: rgba(0,0,0,0.7);
     }
+    /*11、回到顶部*/
+    #goTopBtn {
+      position: fixed;
+      bottom: 80px;
+      right: 15px;
+      cursor: pointer;
+      height: 36px;
+      width: 36px;
+      background-color: #fff;
+      border-radius: 22px;
+      opacity: .8;
+      z-index: 999;
+      border: 1px solid #999;
+    }
+    #goTopBtn span {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url(http://img02.hua.com/m/icon/arrow_Top.png?a) no-repeat center;
+      background-size: 24px 24px;
+      margin-top: 5px;
+      margin-left: 5px;
+    }
   </style>
   <ion-content>
     <!--1，头部导航-->
@@ -247,7 +282,10 @@
         <input type="text" placeholder="巨蟹座" style="padding-left:36px;height: 22px;" ng-focus="goClass()">
       </nav>
       <div class="btn" ng-click="goLogin()">
-        <a href="http://localhost:8100/#/tab/mine/login">登录</a>
+        <a href="http://localhost:8100/#/tab/mine/login" ng-show="showlogin()">登录</a>
+        <a href="http://localhost:8100/#/tab/mine" ng-show="showuser()">
+         <span class="notic_icon"></span>
+        </a>
       </div>
     </header>
 
@@ -256,9 +294,8 @@
                    does-continue="true" slide-interval="4000" auto-play="true"
                    show-pager="true" pager-click="toSlideIndex(index)"
                    on-tap="stopOrStart()" class="bannerTlunbo">
-      <ion-slide ng-repeat="banner in bannerT">
+      <ion-slide ng-repeat="banner in bannerT" ng-click="bannerDesc(banner.id)">
         <img ng-src="{{banner.src}}">
-        <div></div>
       </ion-slide>
     </ion-slide-box>
 
@@ -267,20 +304,20 @@
       <li>认证龙头企业</li>
       <li>12年品牌</li>
       <li>3小时送达</li>
-      <li>最近 <a href="">111</a>条好评</li>
+      <li>最近 <a href="#/tab/dash/kehucomment">999</a>条好评</li>
     </ul>
 
     <!--3、图片分类导航-->
     <ul class="clist">
       <li ng-repeat="list in classlist" ng-click="goThisclass(list.title)">
-        <img ng-src="{{list.src}}">
-        <p>{{list.title}}</p>
+          <img ng-src="{{list.src}}">
+          <p>{{list.title}}</p>
       </li>
     </ul>
 
     <!--4、精选特惠-->
     <p class="tehui_p">————精选特惠————</p>
-    <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x">
+    <ion-scroll has-bouncing="false" style="width:100%;" direction="x" scrollbar-x="false">
       <div style="width:1200px;">
         <ul class="tehui" style="width:1200px;">
           <li ng-repeat="gd in good" ng-click="sale(gd)">
@@ -307,7 +344,7 @@
       </ul>
       <div style="clear: both;"></div>
       <div class="allxianhua" ng-click="goMore()">
-        全部鲜花&nbsp;&nbsp;〉
+        <a href="http://localhost:8100/#/tab/chats/xianhua">全部鲜花&nbsp;&nbsp;〉</a>
       </div>
     </div>
 
@@ -319,7 +356,7 @@
       </div>
       <div class="row">
         <div class="col"><span>热销精选</span></div>
-        <div class="col " align="right"><span>更多〉</span></div>
+        <div class="col " align="right"><span><a href="http://localhost:8100/#/tab/chats/flowers">更多〉</a></span></div>
       </div>
       <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
         <div style="width:1200px;">
@@ -341,7 +378,7 @@
       </div>
       <div class="row">
         <div class="col"><span>送至:</span><span style="color: orange">▽洛阳</span></div>
-        <div class="col " align="right"><span>更多〉</span></div>
+        <div class="col " align="right"><span><a href="http://localhost:8100/#/tab/chats/dangao">更多〉</a></span></div>
       </div>
       <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
         <div style="width:1400px;">
@@ -363,12 +400,12 @@
       </div>
       <div class="row">
         <div class="col"><span>热销精选</span></div>
-        <div class="col " align="right"><span>更多〉</span></div>
+        <div class="col " align="right"><a href="http://localhost:8100/#/tab/chats/flowers"></a>更多〉<span></span></div>
       </div>
       <ion-scroll has-bouncing="false" style="width:100%;scrollbar-base-color: white;solid-color: white;scrollbar-arrow-color: white;stop-color: transparent;scrollbar-face-color: transparent;" direction="x" ng-model="option">
         <div style="width:1400px;">
           <ul class="tehui" style="width:1400px;">
-            <li ng-repeat="gd in lp" ng-click="sale(id)">
+            <li ng-repeat="gd in lp" ng-click="sale(gd)">
               <img ng-src="{{gd.src}}"><br>
               <p>{{gd.title}}</p>
               <p><span>￥{{gd.now_price}}</span></p>
@@ -395,8 +432,8 @@
     <!--9、底部按钮-->
     <div>
       <div class="row">
-        <div class="col anniu"><span>登录</span></div>
-        <div class="col anniu"><span>注册</span></div>
+        <div class="col anniu"><span><a href="http://localhost:8100/#/tab/mine/login">登录</a></span></div>
+        <div class="col anniu"><span><a href="http://localhost:8100/#/tab/mine/slogin">注册</a></span></div>
         <div class="col anniu"><span>客服</span></div>
       </div>
       <div class="row">
@@ -418,6 +455,8 @@
       </div>
       <p>Copyright © 2005~2017 花礼网(中国鲜花礼品网) 版权所有</p>
     </footer>
-
-  </ion-content>
+    <!--11， 回到顶部-->
+    <div id="goTopBtn">
+      <a href="#top" style="display:block;width: 36px;height: 36px;" ng-click="gotop($event)"><span></span></a>
+    </div>
 </ion-view>

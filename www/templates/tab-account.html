@@ -33,6 +33,37 @@
       padding: 10px;
       border:1px solid #ccc;
     }
+    /*购物车的去结算*/
+    .my-cart {
+      background-color: #f4f4f4;
+      border-bottom: 1px solid #e4e4e4;
+      border-top: 1px solid #e4e4e4;
+      box-shadow: 0 1px 0 #FFFFFF inset;
+      padding: 9px 8px;
+      position: relative;
+      margin: 8px 0;
+    }
+    .red {
+      color: #F60;
+    }
+    .my-cart .btn-area-rt {
+      right: 10px;
+      top: 9px;
+    }
+    .btn-type {
+      background: #F60;
+      padding: 6px 10px;
+      font-size: 1em;
+      margin-left: 3px;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      position: absolute;
+      right: 10px;
+      top: 3px;
+    }
+
     .car-content a{
       text-decoration: none;
       color: #666;
@@ -50,8 +81,14 @@
     .car-content ul li .clear{
       clear: both;
     }
-    .car-content ul li .clear .p-img,.car-content ul li .clear .f1,.car-content ul li .clear .undash{
+    .car-content ul li .clear .p-img,.car-content ul li .clear .f1{
       float: left;
+    }
+    .car-content ul li .clear .undash{
+      position: absolute;
+      right: 10px;
+      top:50%;
+      transform: translateY(-50%);
     }
     .car-content ul li .clear .p-img img{
       width: 48px;
@@ -78,13 +115,13 @@
     .car-content ul li .clear .setAmount a.jia{
       left: 116px;
     }
-    .car-content ul li .clear .setAmount input{
+    .car-content ul li .clear .setAmount div{
       width: 40px;
       height: 22px;
+      line-height: 22px;
       position: absolute;
-      top:0;
+      top:1px;
       left:76px;
-      /*padding-left:12px;*/
       outline: 1px solid #ccc;
       border:0;
       text-align: center;
@@ -106,30 +143,38 @@
       <a href="#/tab/dash">去逛逛</a>
     </div>
     <!--购物车非空-->
-    <div class="car-content">
+    <div class="car-content" ng-show="showdata()">
+      <div class="my-cart">
+        <span class="red">共<span id="cart_totalnum">{{num}}</span>件商品</span>
+        <div class="btn-area-rt">
+          <a class="btn-type" style="color: white;" href="#/tab/mine/Payment">去结算</a>
+        </div>
+      </div>
       <!--购物列表内容-->
       <ul>
-        <li>
+        <li class="li" ng-repeat="cdata in cardata">
           <div class="clear">
             <div class="p-img">
               <a href="#">
-                <img ng-src="http://img01.hua.com/uploadpic/newpic/9012161.jpg_80x87.jpg" alt="">
+                <img ng-src="{{cdata.src}}">
               </a>
             </div>
             <div class="f1">
               <a href="#" style="color: black;">
-                <span>[鲜花]</span>
-                <span>爱的诺言</span>
+                <span>{{cdata.title}}</span>
               </a>
               <p class="p-price">
-                现价：<span style="color: #ff6600;">￥199</span>
+                现价：<span style="color: #ff6600;">￥<span class="price">{{cdata.now_price}}</span></span>
               </p>
               <div class="setAmount">
                 <span>数量：</span>
-                <a href="javascript:;" class="jian">-</a><input type="text" placeholder="1"><a href="javascript:;" class="jia">+</a>
+                <a href="javascript:;" class="jian" ng-click="divi($event,cdata.g_id,cdata.now_price,cdata.number)">-</a>
+                <!--<input type="text" class="ipt">-->
+                <div class="ipt"  contenteditable="true">{{cdata.number}}</div>
+                <a class="jia" ng-click="add($event,cdata.g_id,cdata.now_price,cdata.number)">+</a>
               </div>
             </div>
-            <a href="#" class="undash">
+            <a class="undash" ng-click="remove($event,cdata.g_id)">
               <span class="icon_ljt"></span>
             </a>
           </div>
@@ -143,7 +188,7 @@
         </font>
         <font color="#666" style="float: right;">
           合计：
-          <span style="color:#f60;">￥</span>
+          <span style="color:#f60;">￥<span id="amount"></span></span>
         </font>
       </div>
     </div>

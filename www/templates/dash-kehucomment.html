@@ -1,0 +1,169 @@
+<ion-view hide-nav-bar="true">
+  <style>
+    img{
+      width: 45px;
+      height: 52px;
+    }
+    p{
+      color: rgba(0,0,0,0.7);
+      margin:0;
+    }
+    .car-content a{
+      text-decoration: none;
+      color: #666;
+    }
+    .car-content ul{
+      list-style:none outside none;
+      font-style: normal;
+    }
+    .car-content ul li{
+      border-bottom: 1px solid #dbdbdb;
+      padding:15px 0 15px 6px;
+      position: relative;
+      margin-bottom:15px;
+    }
+    .car-content ul li .clear{
+      clear: both;
+    }
+    .car-content ul li .clear .p-img,.car-content ul li .clear .f1{
+      float: left;
+    }
+    .car-content ul li .clear .undash{
+      position: absolute;
+      right: 10px;
+      top:50%;
+      transform: translateY(-50%);
+    }
+    .car-content ul li .clear .p-img img{
+      width: 48px;
+    }
+    .startclass,.dateclass{
+      width: 92px;
+      position: absolute;
+    }
+    .startclass1{
+      width: 92px;
+      position: absolute;
+      right:48px;
+      top:32px;
+      display: inline-block;
+      width: 15px;
+      height: 17px;
+      background: url(http://m.hua.com/images/icon2b.png) -2px -1.5px no-repeat;
+      background-size: 180px 180px;
+    }
+    .startclass2{
+      width: 92px;
+      position: absolute;
+      right:40px;
+      top:32px;
+      display: inline-block;
+      width: 30px;
+      height: 17px;
+      background: url(http://m.hua.com/images/icon2b.png) -2px -1.5px no-repeat;
+      background-size: 180px 180px;
+    }
+    .startclass3{
+      width: 92px;
+      position: absolute;
+      right:36px;
+      top:32px;
+      display: inline-block;
+      width: 45px;
+      height: 17px;
+      background: url(http://m.hua.com/images/icon2b.png) -2px -1.5px no-repeat;
+      background-size: 180px 180px;
+    }
+    .startclass4{
+      width: 92px;
+      position: absolute;
+      right:28px;
+      top:32px;
+      display: inline-block;
+      width: 60px;
+      height: 17px;
+      background: url(http://m.hua.com/images/icon2b.png) -2px -1.5px no-repeat;
+      background-size: 180px 180px;
+    }
+    .startclass5{
+      width: 92px;
+      position: absolute;
+      right:20px;
+      top:32px;
+      display: inline-block;
+      width: 72px;
+      height: 17px;
+      background: url(http://m.hua.com/images/icon2b.png) -2px -1.5px no-repeat;
+      background-size: 180px 180px;
+    }
+    .dateclass{
+      top:52px;
+      right:2px;
+    }
+    .ck_more_2 {
+      margin-top: -1px;
+    }
+    .ck_more_2 {
+      border: 1px solid #E5E5E5;
+      color: #999999;
+      float: left;
+      font-size: 13px;
+      line-height: 28px;
+      margin: 13px 0 15px;
+      text-align: center;
+      width: 100%;
+    }
+    .good-lnk_3 {
+      display: inline-block;
+      width: 16px;
+      height: 14px;
+      background: url(http://m.hua.com/images/icon2b.png) -158px -26px no-repeat;
+      background-size: 355px 355px;
+      vertical-align: top;
+      margin-top: 8px;
+    }
+  </style>
+  <ion-content>
+    <ion-header-bar align-title="center" class="bar-positive">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="go()"></a>
+      <h1 class="title">客户评价</h1>
+      <a class="button button-outline icon-right ion-navicon button-dark"></a>
+    </ion-header-bar>
+    <div class="comment-content car-content">
+      <ul>
+        <li class="li" ng-repeat="cdata in commentdata">
+          <div class="clear">
+            <div class="p-img">
+              <a href="#">
+                <img ng-src="{{cdata.src}}">
+              </a>
+            </div>
+            <div class="f1">
+              <a href="#" style="color: black;">
+                <span ng-bind="usershow(cdata.u_id)"></span>
+              </a>
+              <p class="p-price" style="color: black;">
+                <span class="price">{{cdata.content}}</span>
+              </p>
+              <p class="setAmount">
+                <span class="price">{{cdata.address}}</span>
+              </p>
+            </div>
+            <p name="pstart" class="startclass1" ng-show="startclass1(cdata.start)"></p>
+            <p name="pstart" class="startclass2" ng-show="startclass2(cdata.start)"></p>
+            <p name="pstart" class="startclass3" ng-show="startclass3(cdata.start)"></p>
+            <p name="pstart" class="startclass4" ng-show="startclass4(cdata.start)"></p>
+            <p name="pstart" class="startclass4" ng-show="startclass4(cdata.start)"></p>
+            <p name="pstart" class="startclass5" ng-show="startclass5(cdata.start)"></p>
+            <p class="dateclass">{{cdata.date}}</p>
+          </div>
+          <div style="clear: both;"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="ck_more_2" id="GengDuo" ng-click="getmore()">
+      <span>加载更多</span>
+      <span class="good-lnk_3"></span>
+    </div>
+  </ion-content>
+</ion-view>

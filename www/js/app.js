@@ -46,6 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+  //
   $stateProvider
 
   // setup an abstract state for the tabs directive
@@ -87,7 +88,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
   // 1.1永生花
-  .state('tab.chats', {
+    .state('tab.chats', {
       url: '/chats',
       views: {
         'tab-chats': {
@@ -218,7 +219,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-    .state('tab.mine-login', {
+    .state('tab.mine-login',{
       url: '/mine/login',
       views: {
         'tab-mine': {
@@ -294,7 +295,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+  //星座
+    .state('tab.dash-start',{
+      url:'/dash/start',
+      views:{
+        'tab-dash':{
+          templateUrl:'templates/dash-start.html',
+          controller:'DashStart'
+        }
+      }
+    })
+  //客户评价
+    .state('tab.dash-kehucomment',{
+      url:'/dash/kehucomment',
+      views:{
+        'tab-dash':{
+          templateUrl:'templates/dash-kehucomment.html',
+          controller:'KehuComment'
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

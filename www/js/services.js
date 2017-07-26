@@ -292,15 +292,15 @@ angular.module('starter.services', [])
           function (res) { return res;}
         )},
       bannerBot:function () {
-        return $http.get('http://localhost:3000/banner').then(
+        return $http.get('http://192.168.3.147:3000/banner').then(
           function (res) {return res;}
         )},
       jingxuanlist:function () {
-        return $http.get('http://localhost:3000/jingxuan').then(
+        return $http.get('http://192.168.3.147:3000/jingxuan').then(
           function (res) {return res;}
         )},
       Dashdetail:function(id){
-        return $http.get('http://localhost:3000/detail/'+id).then(
+        return $http.get('http://192.168.3.147:3000/detail/'+id).then(
           function(res){
             return res.data.data;
         })
@@ -320,7 +320,7 @@ angular.module('starter.services', [])
       },
       getallcomment:function (n) {
         console.log(n);
-        return $http.get('http://localhost:3000/getallcomment/'+n).then(
+        return $http.get('http://192.168.3.147:3000/getallcomment/'+n).then(
           function (res) {
             return res.data.data;
           }
@@ -440,13 +440,13 @@ angular.module('starter.services', [])
       },
       getdata: function (id) {
         console.log(id);
-        return $http.get('http://localhost:3000/allcar/' + id).then(function (res) {
+        return $http.get('http://192.168.3.147:3000/allcar/' + id).then(function (res) {
           return res.data.data;
         })
       },
       removedata: function (id, u_id) {
         console.log(id, u_id);
-        return $http.delete('http://localhost:3000/deletecar?g_id=' + id + '&u_id=' + u_id).then(
+        return $http.delete('http://192.168.3.147:3000/deletecar?g_id=' + id + '&u_id=' + u_id).then(
           function (res) {
             console.log(res);
             return res.data.data;
@@ -455,7 +455,7 @@ angular.module('starter.services', [])
       },
       updatedata: function (g_id, num, u_id) {
         // console.log(g_id,u_id,num);
-        return $http.put('http://localhost:3000/updatecar?g_id=' + g_id + '&number=' + num + '&u_id=' + u_id).then(function (res) {
+        return $http.put('http://192.168.3.147:3000/updatecar?g_id=' + g_id + '&number=' + num + '&u_id=' + u_id).then(function (res) {
           return res.data.data;
         })
       }

@@ -176,6 +176,7 @@ angular.module('starter.controllers', [])
       $scope.n++;
       Dash.getallcomment($scope.n).then(function (res) {
         $scope.commentdata=res;
+        console.log(res)
         if($scope.n==parseInt(res.length/6)+1){
           console.log( angular.element(document.getElementsByClassName('pstart')));
           angular.element(document.getElementById('GengDuo'))[0].children[0].innerHTML='加载完毕';
@@ -1012,8 +1013,7 @@ angular.module('starter.controllers', [])
   $scope.zhuce = function(user){
     $scope.info = '正在注册，请稍后..';
     console.log(user);
-    Login.Zhuce(user)
-      .then(function(result){
+    Login.Zhuce(user).then(function(result){
         console.log(result);
         if (result.success){
           $scope.user={};
@@ -1021,6 +1021,9 @@ angular.module('starter.controllers', [])
           alert($scope.info);
           user='';
           $window.location.href='#/tab/mine/login';
+        }else{
+          alert('手机号已被注册！');
+          $scope.info = '注册'; 
         }
       })
   }
@@ -1096,7 +1099,6 @@ angular.module('starter.controllers', [])
       $scope.suc=true;
     }else{
       $scope.paymentList = result;
-      console.log( $scope.paymentList)
     }
   })
 })

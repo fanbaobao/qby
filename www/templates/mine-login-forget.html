@@ -56,7 +56,7 @@
             <span class="error" ng-show="LoginFrom.pwd2.$error.required && LoginFrom.pwd2.$dirty">此字段不能为空</span>
             <span class="error" ng-show="LoginFrom.pwd2.$dirty && user.password!=user.new2pwd">两次密码输入不一致</span>
           </label>
-          <button class="button button-full button-positive" ng-disabled="LoginFrom.$invalid" ng-click="pwdUpdate(user)">
+          <button class="button button-full button-positive" ng-disabled="LoginFrom.$invalid || user.password!=user.new2pwd" ng-click="pwdUpdate(user)">
             重置密码
           </button>
         </div>

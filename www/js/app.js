@@ -22,6 +22,110 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   };
 })
+  .directive("mystarselect", function () {
+    return {
+      restrict: 'AE',
+      replace: true,
+      scope: {
+        level: '=',
+      },
+      template: '<div id="mystarselect"></div>',
+      link: function (scope) {
+        function star5(starid) {
+          src = "../img/detail/";
+          this.star_on_left = src + "icon_collect_pressed.png";
+          this.star_off_left = src + "icon_collect.png";
+          this.star_on_right = src + "icon_collect_pressed.png";
+          this.star_off_right = src + "icon_collect.png";
+          this.id = starid;
+          this.point = 0;
+
+          this.initial = starInitial;
+          this.redraw = starRedraw;
+          this.attach = starAttach;
+          this.deattach = starDeAttach;
+          this.doall = starDoall;
+        }
+
+        function starDoall(point) {
+          this.initial();
+          this.attach();
+          this.redraw(point);
+        }
+
+        function starInitial() {
+          var html = "<div style='float:left'>" +
+            "<img id='star" + this.id + "_1' point='1' src='" + this.star_off_right + "'>&nbsp;";
+          html += "<img id='star" + this.id + "_2' point='2' src='" + this.star_off_right + "'>&nbsp;";
+          html += "<img id='star" + this.id + "_3' point='3' src='" + this.star_off_right + "'>&nbsp;";
+          html += "<img id='star" + this.id + "_4' point='4' src='" + this.star_off_right + "'>&nbsp;";
+          html += "<img id='star" + this.id + "_5' point='5' src='" + this.star_off_right + "'>" + "</div>";
+          //document.write(html);
+          document.getElementById("mystarselect").innerHTML = html;
+        }
+
+        function starAttach() {
+          for (var i = 1; i < 6; i++) {
+            document.getElementById("star" + this.id + "_" + i).style.cursor = "pointer";
+            document.getElementById("star" + this.id + "_" + i).onmouseover = moveStarPoint;
+            document.getElementById("star" + this.id + "_" + i).onmouseout = outStarPoint;
+            document.getElementById("star" + this.id + "_" + i).starid = this.id;
+            document.getElementById("star" + this.id + "_" + i).onclick = setStarPoint;
+          }
+        }
+
+        function starDeAttach() {
+          for (var i = 1; i < 6; i++) {
+            document.getElementById("star" + this.id + "_" + i).style.cursor = "default";
+            document.getElementById("star" + this.id + "_" + i).onmouseover = null;
+            document.getElementById("star" + this.id + "_" + i).onmouseout = null;
+            document.getElementById("star" + this.id + "_" + i).onclick = null;
+          }
+        }
+
+        function starRedraw(point) {
+          for (var i = 1; i < 6; i++) {
+            if (i <= point)
+              if (parseInt(i / 2) * 2 == i)
+                document.getElementById("star" + this.id + "_" + i).src = this.star_on_right;
+              else
+                document.getElementById("star" + this.id + "_" + i).src = this.star_on_left;
+            else if (parseInt(i / 2) * 2 == i)
+              document.getElementById("star" + this.id + "_" + i).src = this.star_off_right;
+            else
+              document.getElementById("star" + this.id + "_" + i).src = this.star_off_left;
+          }
+        }
+
+        function moveStarPoint(evt) {
+          var pstar = evt ? evt.target : event.toElement;
+          var point = pstar.getAttribute("point");
+          var starobj = new star5(pstar.starid);
+          starobj.redraw(point);
+        }
+
+        function outStarPoint(evt) {
+          var pstar = evt ? evt.target : event.srcElement;
+          var starobj = new star5(pstar.starid);
+          starobj.redraw(0);
+        }
+
+        function setStarPoint(evt) {
+          var pstar = evt ? evt.target : event.srcElement;
+          var starobj = new star5(pstar.starid);
+          starobj.deattach();
+          var n = pstar.getAttribute("point");
+          console.log("选择的等级:" + n);
+          scope.level = n;
+          starobj.doall(n);
+        }
+
+        var star = new star5("point");
+        star.doall(5);
+      }
+    };
+  })
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
 
@@ -227,13 +331,43 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.mine-allorder', {
+      .state('tab.mine-allorder', {
       cache:false,
       url: '/mine/allorder',
       views: {
         'tab-mine': {
           templateUrl: 'templates/mine-allorders.html',
           controller: 'MineallorderCtrl'
+        }
+      }
+    })
+    .state('tab.mine-orderpinglun', {
+      cache:false,
+      url: '/mine/pinglun/:order_number',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-pinglun.html',
+          controller: 'pinglunCtrl'
+        }
+      }
+    })
+    .state('tab.mine-collect', {
+      cache:false,
+      url: '/mine/collect',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-collect.html',
+          controller: 'MinecollectCtrl'
+        }
+      }
+    })
+    .state('tab.mine-dpj', {
+      cache:false,
+      url: '/mine/dpj',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-dpj.html',
+          controller: 'MinedpjCtrl'
         }
       }
     })
@@ -273,6 +407,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-mine': {
           templateUrl: 'templates/mine-slogin.html',
           controller: 'MineSloginCtrl'
+        }
+      }
+    })
+    .state('tab.mine-login-forget', {
+      url: '/mine/login/forget',
+      views: {
+        'tab-mine': {
+          templateUrl: 'templates/mine-login-forget.html',
+          controller: 'MineFloginCtrl'
         }
       }
     })

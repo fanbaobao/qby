@@ -1,0 +1,43 @@
+<ion-view view-title="评价" hide-tabs>
+  <style>
+    .full-image {
+      width: 70%;
+    }
+    .start img {
+      -webkit-user-drag: none;
+      width: 10%;
+    }
+    ::-webkit-scrollbar{
+      width: 0px;
+      height: 0px;
+      background-color: transparent;
+    }
+  </style>
+  <ion-content>
+    <div class="list card">
+      <div class="item item-avatar">
+        <img src="{{xinxi.src}}">
+        <h2>{{xinxi.title}}</h2>
+        <p>订单编号：{{xinxi.order_number}}</p>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" src="{{xinxi.src}}">
+        <p>
+          <textarea placeholder="小主，提出您宝贵的意见吧！" required style="border:1px solid #aaa;width: 360px;height: 200px;resize: none; border-radius: 20px; outline: none; padding:20px;" ng-model="order.pj"></textarea>
+        </p>
+        <p class="start">
+          <span>商品评价：<mystarselect level="evaluateLevel" ng-click="start(evaluateLevel)" style="position: relative;top: -23px;left: 80px;"></mystarselect></span>
+          <span class="subdued" style="position: relative;top: -18px;">{{evaluateLevel? evaluateLevel : 5}}分</span>
+        </p>
+        <button class="button button-outline button-positive"
+                style="position: absolute;top: 547px;left: 315px;border-radius: 10px;"
+                ng-disable="suc"
+                ng-click="addpj(order.pj,evaluateLevel)">
+          发布
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

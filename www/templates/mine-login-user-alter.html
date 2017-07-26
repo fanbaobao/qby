@@ -4,6 +4,9 @@
       background-color: rgb(240, 239, 237);
       padding:0;
     }
+    element.style {
+      height:100%;
+    }
     .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
       padding-left:30px;
       min-height: 0px;
@@ -68,7 +71,7 @@
               <span class="error" ng-show="LoginFrom.pwd2.$error.required && LoginFrom.pwd2.$dirty">此字段不能为空</span>
               <span class="error" ng-show="LoginFrom.pwd2.$dirty && user.newpwd!=user.new2pwd">两次密码输入不一致</span>
             </label>
-            <button class="button button-full button-positive" ng-disabled="LoginForm.$invalid" ng-click="pwdUpdate(user)">
+            <button class="button button-full button-positive" ng-disabled="LoginFrom.$invalid" ng-click="pwdUpdate(user)">
               完成
             </button>
           </div>

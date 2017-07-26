@@ -218,6 +218,132 @@ angular.module('starter.controllers', [])
     enableFriends: true
   }
 })
+
+//商品详情
+.controller('dashDetailCtrl', function($scope,Dash,$stateParams,Comment,Car,Collect,$window) {
+    $scope.notes_name = localStorage.getItem('name');
+    $scope.id = localStorage.getItem('id');
+    $scope.detail = [];
+    $scope.moredetail=[];
+    //判断是否登录
+    $scope.Href = function(href){
+      if($scope.notes_name){
+        $window.location.href = href;
+      }else{
+        $window.location.href= '#/tab/mine/login'
+      }
+    }
+    $scope.collectxinxi = {
+      u_id:$scope.id,
+      g_id:$stateParams.dashId
+    }
+    //判断是符登录
+    Collect.allcollect($scope.collectxinxi).then(function(result){
+      $scope.isShow = result.success;
+    })
+    //判断购物车长度
+    Car.getdata($scope.id).then(function(result){
+      console.log(result)
+      $scope.carnum = result.length;
+    })
+    $scope.addsc= function(){
+      if ($scope.notes_name){
+        $scope.isShow = false;
+        Collect.addcollect($scope.collectxinxi)
+      }else{
+        $window.location.href= '#/tab/mine/login'
+      }
+    }
+    //移除收藏
+    $scope.removesc= function(){
+      $scope.isShow = true;
+      Collect.removecollect($scope.collectxinxi)
+    }
+    Dash.Dashdetail($stateParams.dashId).then(function(result){
+      console.log(result);
+      for (var i = 0;i<result.length;i++){
+        if (i<4){
+          $scope.detail.push(result[i]);
+        }
+        $scope.moredetail.push(result[i]);
+      }
+      console.log($scope.detail)
+      console.log($scope.moredetail)
+    })
+    Dash.Dashdetaildesc($stateParams.dashId).then(function(result){
+      $scope.detaildesc = result[0];
+      $scope.url = "#/tab/dash/detailorder/"+$scope.detaildesc.id;
+    })
+    Comment.all($stateParams.dashId).then(function(result){
+      $scope.comment = result;
+      $scope.length = result.length;
+    })
+    //  加入购物和车
+    $scope.addaccount = function(){
+      $scope.xinxi = {
+        u_id:localStorage.getItem('id'),
+        g_id:$stateParams.dashId,
+        number:1
+      }
+      if ($scope.notes_name){
+        Car.addcar($scope.xinxi).then(function(result){
+          if (result.success){
+            alert('成功加入购物车！');
+            $scope.carnum = $scope.carnum + 1;
+          }
+        })
+      }else{
+        $window.location.href= '#/tab/mine/login';
+      }
+    }
+  })
+//下订单
+.controller('dashDetailorderCtrl', function($scope,Dash,$stateParams,PaymentPay,$ionicHistory) {
+    console.log($stateParams.gId);
+    //获取单价
+    Dash.Dashdetaildesc($stateParams.gId).then(function(result){
+      $scope.price = result[0].now_price;
+      console.log($scope.price)
+    })
+    $scope.data = [
+      {value:'--08:00-09:00--'},
+      {value:'--09:00-10:00--'},
+      {value:'--10:00-11:00--'},
+      {value:'--11:00-12:00--'},
+      {value:'--12:00-13:00--'},
+      {value:'--13:00-14:00--'},
+      {value:'--14:00-15:00--'},
+      {value:'--15:00-16:00--'},
+      {value:'--16:00-17:00--'},
+      {value:'--17:00-18:00--'},
+    ];
+    $scope.order_number = Date.now();
+    $scope.paymoney = function (order) {
+      console.log(order);
+      $scope.orders = {
+        u_id:localStorage.getItem('id'),
+        g_id:$stateParams.gId,
+        number:order.number,
+        order_number:$scope.order_number,
+        isSure:1,
+        amount:order.number*$scope.price,
+        consignee:order.consignee,
+        pstime:order.pstime,
+        psaddress:order.psaddress,
+        psphone:order.psphone,
+        psshijian:order.psshijian.value,
+        psdesc:order.psdesc,
+      }
+      console.log($scope.orders);
+      PaymentPay.addpay($scope.orders).then(function(result){
+        console.log(result);
+        if(result.success){
+          alert('购买成功！')
+          $ionicHistory.goBack();
+        }
+      })
+    }
+  })
 //我的
 .controller('MineCtrl', function($scope,$window,$rootScope) {
   $scope.$on('$ionicView.enter', function () {
@@ -241,25 +367,18 @@ angular.module('starter.controllers', [])
   $scope.Login = function(user){
     $scope.info = '正在登陆...'
     console.log(user);
-     if (user){
-       Login.panduanLogin(user.name,user.pwd)
-         .then(function(result){
-           console.log(result);
-           if (result.success){
-             $scope.info = '登陆成功';
-             localStorage.setItem('name',result.name);
-             localStorage.setItem('id',result.id);
-             $window.location.href='#/tab/mine';
-           }else{
-             $scope.info = '登陆';
-             $scope.suc=result.success;
-           }
-       });
-     }else{
-       alert('用户名或密码不能为空');
-       $scope.info = '登陆';
-     }
-
+     Login.panduanLogin(user.name,user.pwd).then(function(result){
+         console.log(result);
+         if (result.success){
+           $scope.info = '登陆成功';
+           localStorage.setItem('name',result.name);
+           localStorage.setItem('id',result.id);
+           $window.location.href='#/tab/mine';
+         }else{
+           $scope.info = '登陆';
+           $scope.suc=result.success;
+         }
+     });
   }
 })
 //注册用户
@@ -267,7 +386,8 @@ angular.module('starter.controllers', [])
   $scope.info = '注册';
   $scope.zhuce = function(user){
     $scope.info = '正在注册，请稍后..';
-    Login.Zhuce(user.id,user,name,user.pwd)
+    console.log(user);
+    Login.Zhuce(user)
       .then(function(result){
         console.log(result);
         if (result.success){
@@ -288,6 +408,17 @@ angular.module('starter.controllers', [])
     $window.location.href='#/tab/mine';
   }
 })
+// 忘记密码
+.controller('MineFloginCtrl', function($scope,Login,$window) {
+  $scope.pwdUpdate = function(user){
+    Login.forget(user)
+    .then(function(result){
+      if (result.success){
+        $window.location.href='#/tab/mine/login';
+      }
+    })
+  }
+})
 //修改密码
 .controller('MineloginUserAlterCtrl', function($scope,Login,$window) {
   $scope.notes_name = localStorage.getItem('name');
@@ -304,7 +435,35 @@ angular.module('starter.controllers', [])
     }
 
 })
-//代付款
+//我的收藏
+.controller('MinecollectCtrl', function($scope,Collect) {
+    Collect.collect(localStorage.getItem('id')).then(function(result){
+      $scope.arr=[];
+      if (result.success){
+        if (result.data.length == 0){
+          $scope.suc = true;
+        }else{
+          $scope.xinxi = result.data;
+          for (var i = 0; i<$scope.xinxi.length;i++){
+            $scope.arr.push($scope.xinxi[i]);
+          }
+        }
+      }
+    })
+
+    $scope.deletecollect = function(payment){
+      console.log(payment);
+      $scope.xinxi = {
+        u_id:localStorage.getItem('id'),
+        g_id:payment.g_id
+      }
+      Collect.removecollect($scope.xinxi).then(function(result){
+        $scope.arr.splice($scope.arr.indexOf(payment),1);
+      })
+    }
+
+  })
+//代付款页面
 .controller('MinePaymentCtrl', function($scope,PaymentPay) {
   PaymentPay.payment(localStorage.getItem('id')).then(function(result){
     console.log(result);
@@ -345,6 +504,7 @@ angular.module('starter.controllers', [])
 .controller('MineallorderCtrl', function($scope,$stateParams,Order) {
     $scope.paymentList = [];
     Order.orders(localStorage.getItem('id')).then(function(result){
+      console.log(result);
       if (result.length == 0){
         $scope.suc=true;
       }else{
@@ -352,12 +512,15 @@ angular.module('starter.controllers', [])
           $scope.paymentList.push(result[i]);
         }
       }
+      console.log($scope.paymentList);
     })
     $scope.deleteorder = function(id){
+      console.log(id);
       $scope.id = id.order_number;
+      console.log($scope.paymentList.indexOf(id));
       Order.deleteorders($scope.id).then(function(result){
         if (result.success){
-          $scope.paymentList.splice($scope.paymentList.indexOf($scope.id)+1,1);
+          $scope.paymentList.splice($scope.paymentList.indexOf(id),1);
         }
       })
     }
@@ -365,59 +528,70 @@ angular.module('starter.controllers', [])
 //全部订单详情
 .controller('MineorderdetailsCtrl', function($scope,$stateParams,Order,$window) {
     Order.orderdetails($stateParams.order_number).then(function(result){
+        $scope.suc = result[0].ispj;
       $scope.paymentList = result;
     })
-    $scope.deleteorder = function(){
-      Order.deleteorders($stateParams.order_number).then(function(result){
+    $scope.pinglun = function(){
+      $window.location.href = '#/tab/mine/pinglun/' + $stateParams.order_number;
+    }
+  })
+//待评价
+.controller('MinedpjCtrl', function($scope,$stateParams,Order) {
+    $scope.paymentList = [];
+    Order.orders(localStorage.getItem('id')).then(function(result){
+      console.log(result);
+      for (var i = 0;i<result.length;i++){
+        console.log(result[i].ispj);
+        if(result[i].ispj == 0){
+          $scope.paymentList.push(result[i]);
+        }
+      }
+      if ($scope.paymentList.length == 0){
+        $scope.suc=true;
+      }
+    })
+    $scope.deleteorder = function(id){
+      console.log(id);
+      $scope.id = id.order_number;
+      console.log($scope.paymentList.indexOf(id));
+      Order.deleteorders($scope.id).then(function(result){
         if (result.success){
-          alert('删除成功！')
-          $window.location.href='#/tab/mine/allorder';
+          $scope.paymentList.splice($scope.paymentList.indexOf(id),1);
         }
       })
     }
   })
-//商品详情
-.controller('dashDetailCtrl', function($scope,Dash,$stateParams,Comment,$window) {
-
-  console.log($stateParams.dashId)
-  // $scope.onDragUp=function(){
-  //  $window.location.href='#/tab/mine/login';
-  // }
-  //下划刷新
-  // $scope.onDragDown=function(){
-
-  // }
-  Dash.Dashdetail($stateParams.dashId).then(function(result){
-    $scope.detail = result;
-    console.log(result)
+// 评价页面
+.controller('pinglunCtrl', function($scope,$stateParams,Order,Comment,$ionicHistory) {
+  console.log($stateParams.order_number);
+  Order.orderdetails($stateParams.order_number).then(function(result){
+    $scope.xinxi = result[0];
   })
-  Dash.Dashdetaildesc($stateParams.dashId).then(function(result){
-    $scope.detaildesc = result[0];
-    console.log($scope.detaildesc);
-  })
-  Comment.all($stateParams.dashId).then(function(result){
-    $scope.comment = result;
-    $scope.length = result.length;
-    console.log(result);
-  })
-
+  $scope.addpj = function(order,start){
+      $scope.suc = false;
+      if (start){
+        $scope.start = start;
+      }else{
+        $scope.start = 5;
+      }
+      $scope.pjxx = {
+        id:$stateParams.order_number,
+        u_id:localStorage.getItem('id'),
+        g_id:$scope.xinxi.id,
+        content:order,
+        start:$scope.start,
+      }
+      Comment.pingjia($scope.pjxx).then(function(res){
+        console.log(res);
+        if (res.success) {
+          Comment.updataispj($stateParams.order_number,1).then(function(result){
+            console.log(result);
+            if (result.success){
+              $ionicHistory.goBack();
+            }
+          })
+        }
+      })
+    }
 })
-.controller('dashDetailMoreCtrl', function($scope,Dash,$stateParams,$ionicHistory,Comment,$window) {
-  console.log($stateParams.moreId)
-  $scope.go=function () {
-    $ionicHistory.goBack();
-  }
-
-})
-//下订单
-.controller('dashDetailorderCtrl', function($scope,Dash,$stateParams,$ionicHistory,Comment,$window) {
-  console.log($stateParams.moreId)
-  $scope.go=function () {
-    $ionicHistory.goBack();
-  }
-
-})
-
-
-
 

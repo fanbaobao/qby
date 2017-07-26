@@ -1,0 +1,59 @@
+<ion-view view-title="收藏夹">
+  <style>
+    .scroll-content {
+      background-color: rgb(240, 239, 237);
+      padding: 0;
+    }
+    .none-payment{
+      width:100%;
+      height:177px;
+      text-align: center;
+    }
+    section .inner_c .paymentlist {
+      height: 135px;
+      margin: 10px 7px;
+    }
+    section .inner_c .paymentlist {
+      height: auto;
+      margin: 10px;
+    }
+    .item, .item h1, .item h2, .item h3, .item h4, .item h5, .item h6, .item p, .item-content, .item-content h1, .item-content h2, .item-content h3, .item-content h4, .item-content h5, .item-content h6, .item-content p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  </style>
+  <ion-content>
+    <section>
+      <div class="inner_c">
+        <div class="none-payment" ng-show="suc">
+          <img src="http://img02.hua.com/m/no_order.png" alt="" style="margin:50px 0 30px;">
+          <p style="color: #666; font-size: 17px; text-align: center;">暂无相关订单</p>
+        </div>
+        <div class="payment" ng-show="!suc">
+          <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right"
+                      ng-repeat="payment in arr"
+                      type="item-text-wrap"
+                      href="#/tab/dash/dashdetail/{{payment.g_id}}"
+                      style="margin-bottom:10px;">
+              <img ng-src="{{payment.src}}" style="top: 20px; max-width:70px;max-height: 70px;">
+              <span style="display:inline-block;width: 270px;position: relative;left: 30px;">
+                <h2>{{payment.title}}</h2>
+                <p>{{payment.material}}</p>
+                <span style="color:red">￥{{payment.pre_price}}</span>
+                <span style="margin-left: 10px; color:red">{{payment.class}}</span>
+              </span>
+              <i class="icon ion-chevron-right icon-accessory"></i>
+              <ion-option-button class="button-assertive" ng-click="deletecollect(payment)">
+                删除
+              </ion-option-button>
+            </ion-item>
+          </ion-list>
+        </div>
+    </section>
+  </ion-content>
+</ion-view>
